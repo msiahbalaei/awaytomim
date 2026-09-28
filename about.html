@@ -3,329 +3,138 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>About — A way to Mim</title>
 
   <style>
     :root {
       --bg: #04060b;
-      --panel: rgba(255, 255, 255, 0.025);
       --text: #f4f6ff;
       --muted: #7d8496;
-      --soft: #b8bfd2;
-      --line: rgba(255, 255, 255, 0.08);
+      --line: rgba(255,255,255,.08);
       --accent: #91a4ff;
-      --accent-soft: rgba(145, 164, 255, 0.12);
+      --accent-soft: rgba(145,164,255,.12);
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 70% 35%, rgba(91,112,255,.08), transparent 28%),
+        #04060b;
       color: var(--text);
-      font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      overflow-x: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
     }
 
-    /* =========================
-       BACKGROUND
-    ========================= */
-
-    .space {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(70, 90, 190, 0.06),
-          transparent 32%
-        ),
-        radial-gradient(
-          circle at 15% 80%,
-          rgba(90, 70, 180, 0.035),
-          transparent 30%
-        ),
-        #04060b;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .stars {
-      position: absolute;
-      inset: -20%;
-
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .45;
       background-image:
-        radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.7) 1px,
-          transparent 1px
-        ),
-        radial-gradient(
-          circle,
-          rgba(255, 255, 255, 0.28) 1px,
-          transparent 1px
-        );
-
-      background-size:
-        145px 145px,
-        240px 240px;
-
-      background-position:
-        30px 20px,
-        110px 90px;
-
-      opacity: 0.12;
-
-      animation:
-        starsMove 60s linear infinite;
+        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,.3) 1px, transparent 1px);
+      background-size: 120px 120px, 190px 190px;
+      background-position: 20px 30px, 70px 80px;
     }
 
-    .glow {
-      position: absolute;
-
-      width: 650px;
-      height: 650px;
-
-      top: -300px;
-      right: -250px;
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle,
-          rgba(91, 111, 255, 0.08),
-          transparent 68%
-        );
-
-      filter: blur(40px);
-    }
-
-    /* =========================
-       LAYOUT
-    ========================= */
-
-    .page {
-      width: min(1180px, calc(100% - 48px));
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1150px;
       margin: auto;
+      min-height: 100vh;
+      padding: 32px 42px 120px;
     }
-
-    /* =========================
-       HEADER
-    ========================= */
 
     header {
-      height: 90px;
-
       display: flex;
-      align-items: center;
       justify-content: space-between;
-
-      border-bottom: 1px solid var(--line);
-
-      animation:
-        fadeDown 0.9s ease both;
+      align-items: center;
     }
 
-    .logo {
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      color: var(--muted);
+    .brand {
+      font-size: 14px;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      text-decoration: none;
+      font-weight: 600;
     }
 
     .back {
       color: var(--muted);
-      text-decoration: none;
-
-      font-size: 10px;
-
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-
-      transition:
-        color 0.3s ease,
-        transform 0.3s ease;
+      font-size: 12px;
     }
 
-    .back:hover {
-      color: var(--text);
-      transform: translateX(-3px);
+    main {
+      padding-top: 90px;
     }
 
-    /* =========================
-       PAGE INTRO
-    ========================= */
-
-    .intro {
-      padding: 100px 0 80px;
-
-      border-bottom: 1px solid var(--line);
-
-      animation:
-        fadeUp 1s ease both;
-
-      animation-delay: 0.1s;
-    }
-
-    .mission {
-      margin-bottom: 28px;
-
-      font-size: 10px;
-
+    .eyebrow {
       color: var(--accent);
-
-      letter-spacing: 0.22em;
-
+      font-size: 12px;
+      letter-spacing: .18em;
       text-transform: uppercase;
-    }
-
-    .mission::before {
-      content: "";
-
-      display: inline-block;
-
-      width: 28px;
-      height: 1px;
-
-      margin-right: 12px;
-
-      vertical-align: middle;
-
-      background: var(--accent);
-
-      opacity: 0.7;
+      margin-bottom: 20px;
     }
 
     h1 {
-      max-width: 900px;
-
-      font-size:
-        clamp(55px, 9vw, 115px);
-
-      line-height: 0.88;
-
-      letter-spacing: -0.065em;
-
+      font-size: clamp(48px, 7vw, 88px);
+      line-height: .95;
+      letter-spacing: -.06em;
       font-weight: 500;
+      margin-bottom: 25px;
     }
 
-    .intro-description {
-      max-width: 620px;
-
-      margin-top: 38px;
-
-      color: var(--muted);
-
+    .intro {
+      max-width: 650px;
+      color: #aeb4c5;
       font-size: 17px;
-
-      line-height: 1.9;
+      line-height: 1.8;
     }
 
-    .intro-description strong {
-      color: var(--soft);
-      font-weight: 400;
-    }
-
-    /* =========================
-       PROFILE GRID
-    ========================= */
-
-    .profile {
+    .grid {
+      margin-top: 80px;
       display: grid;
-
-      grid-template-columns:
-        0.8fr 1.2fr;
-
-      gap: 80px;
-
-      padding: 90px 0;
-
-      border-bottom: 1px solid var(--line);
+      grid-template-columns: 1.1fr .9fr;
+      gap: 70px;
+      align-items: start;
     }
 
     .section-label {
-      font-size: 10px;
-
-      color: var(--accent);
-
-      letter-spacing: 0.18em;
-
+      color: var(--muted);
+      font-size: 11px;
       text-transform: uppercase;
+      letter-spacing: .16em;
+      margin-bottom: 18px;
     }
 
-    .section-label span {
-      color: var(--muted);
-      margin-right: 10px;
+    .text {
+      color: #b5bac9;
+      font-size: 15px;
+      line-height: 1.85;
     }
-
-    .profile-content h2 {
-      font-size: clamp(30px, 4vw, 48px);
-
-      line-height: 1.05;
-
-      letter-spacing: -0.04em;
-
-      font-weight: 400;
-
-      margin-bottom: 30px;
-    }
-
-    .profile-content p {
-      max-width: 650px;
-
-      color: var(--muted);
-
-      font-size: 16px;
-
-      line-height: 1.9;
-
-      margin-bottom: 22px;
-    }
-
-    .profile-content p strong {
-      color: var(--soft);
-      font-weight: 400;
-    }
-
-    /* =========================
-       DATA PANEL
-    ========================= */
 
     .data-panel {
-      margin-top: 45px;
-
-      border-top: 1px solid var(--line);
-
-      border-bottom: 1px solid var(--line);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.025);
+      padding: 25px;
+      border-radius: 18px;
     }
 
     .data-row {
-      display: grid;
-
-      grid-template-columns: 150px 1fr;
-
+      display: flex;
+      justify-content: space-between;
       gap: 20px;
-
-      padding: 18px 0;
-
+      padding: 17px 0;
       border-bottom: 1px solid var(--line);
     }
 
@@ -333,596 +142,104 @@
       border-bottom: 0;
     }
 
-    .data-key {
+    .data-row span:first-child {
       color: var(--muted);
-
-      font-size: 10px;
-
-      letter-spacing: 0.14em;
-
-      text-transform: uppercase;
+      font-size: 12px;
     }
 
-    .data-value {
-      color: var(--soft);
-
+    .data-row span:last-child {
+      color: #e7eaff;
       font-size: 13px;
-
-      line-height: 1.6;
+      text-align: right;
     }
-
-    /* =========================
-       ORBIT VISUAL
-    ========================= */
-
-    .profile-visual {
-      min-height: 420px;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-    }
-
-    .orbit-system {
-      position: relative;
-
-      width: 360px;
-      height: 360px;
-
-      animation:
-        float 8s ease-in-out infinite;
-    }
-
-    .orbit {
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      width: 330px;
-      height: 110px;
-
-      border:
-        1px solid
-        rgba(145, 164, 255, 0.16);
-
-      border-radius: 50%;
-
-      transform:
-        translate(-50%, -50%)
-        rotateX(65deg)
-        rotateZ(20deg);
-
-      animation:
-        rotateOrbit 20s linear infinite;
-    }
-
-    .orbit.two {
-      width: 280px;
-      height: 150px;
-
-      border-color:
-        rgba(255, 255, 255, 0.08);
-
-      transform:
-        translate(-50%, -50%)
-        rotateX(65deg)
-        rotateY(45deg);
-
-      animation:
-        rotateOrbitReverse 26s linear infinite;
-    }
-
-    .orbit.three {
-      width: 240px;
-      height: 90px;
-
-      border-color:
-        rgba(145, 164, 255, 0.1);
-
-      transform:
-        translate(-50%, -50%)
-        rotateX(65deg)
-        rotateY(-35deg);
-
-      animation:
-        rotateOrbit 15s linear infinite reverse;
-    }
-
-    .center {
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      width: 110px;
-      height: 110px;
-
-      transform:
-        translate(-50%, -50%);
-
-      border-radius: 50%;
-
-      background:
-        radial-gradient(
-          circle at 35% 30%,
-          #e7ebff,
-          #9aa9ff 15%,
-          #414b73 35%,
-          #111525 65%,
-          #05070d
-        );
-
-      box-shadow:
-        0 0 40px
-          rgba(130, 150, 255, 0.2),
-        0 0 100px
-          rgba(100, 120, 255, 0.06),
-        inset -15px -18px 25px
-          rgba(0, 0, 0, 0.7);
-
-      animation:
-        breathe 5s ease-in-out infinite;
-
-      z-index: 5;
-    }
-
-    .center::before {
-      content: "";
-
-      position: absolute;
-
-      inset: 12px;
-
-      border-radius: 50%;
-
-      border:
-        1px solid
-        rgba(255, 255, 255, 0.18);
-    }
-
-    .center::after {
-      content: "";
-
-      position: absolute;
-
-      width: 18px;
-      height: 18px;
-
-      top: 25%;
-      left: 30%;
-
-      border-radius: 50%;
-
-      background: white;
-
-      filter: blur(6px);
-
-      opacity: 0.5;
-    }
-
-    .signal {
-      position: absolute;
-
-      width: 1px;
-      height: 60px;
-
-      background:
-        linear-gradient(
-          to bottom,
-          transparent,
-          rgba(145, 164, 255, 0.8),
-          transparent
-        );
-
-      left: 50%;
-      top: 4%;
-
-      opacity: 0.35;
-
-      animation:
-        signalPulse 3s ease-in-out infinite;
-    }
-
-    .signal.bottom {
-      top: auto;
-      bottom: 5%;
-
-      animation-delay: 1.5s;
-    }
-
-    /* =========================
-       PRINCIPLES
-    ========================= */
 
     .principles {
-      padding: 90px 0;
-
-      border-bottom: 1px solid var(--line);
+      margin-top: 80px;
     }
 
-    .principles-header {
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: flex-end;
-
-      gap: 40px;
-
-      margin-bottom: 50px;
-    }
-
-    .principles-header h2 {
-      font-size: clamp(32px, 5vw, 58px);
-
-      font-weight: 400;
-
-      letter-spacing: -0.05em;
-    }
-
-    .principles-header p {
-      max-width: 360px;
-
-      color: var(--muted);
-
-      font-size: 13px;
-
-      line-height: 1.8;
-    }
-
-    .principles-grid {
+    .principle-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(3, 1fr);
-
-      border-top: 1px solid var(--line);
-      border-left: 1px solid var(--line);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
     }
 
     .principle {
-      min-height: 230px;
-
-      padding: 30px;
-
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-
-      transition:
-        background 0.4s ease,
-        transform 0.4s ease;
-    }
-
-    .principle:hover {
-      background:
-        rgba(145, 164, 255, 0.035);
-
-      transform: translateY(-3px);
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
     }
 
     .principle-number {
       color: var(--accent);
-
-      font-size: 10px;
-
-      letter-spacing: 0.16em;
+      font-size: 11px;
+      letter-spacing: .1em;
+      margin-bottom: 14px;
     }
 
     .principle h3 {
-      margin-top: 65px;
-
-      font-size: 20px;
-
-      font-weight: 400;
-
-      letter-spacing: -0.02em;
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 9px;
     }
 
     .principle p {
-      margin-top: 14px;
-
       color: var(--muted);
-
       font-size: 13px;
-
       line-height: 1.7;
     }
 
-    /* =========================
-       FOOTER NAV
-    ========================= */
-
-    .navigation {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
-      border-left: 1px solid var(--line);
-
-      border-bottom: 1px solid var(--line);
+    .bottom-nav {
+      position: fixed;
+      z-index: 10;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      background: rgba(4,6,11,.82);
+      backdrop-filter: blur(16px);
+      border-radius: 999px;
     }
 
-    .nav-item {
-      position: relative;
-
-      padding: 28px 20px;
-
-      border-right: 1px solid var(--line);
-
-      text-decoration: none;
-
+    .bottom-nav a {
       color: var(--muted);
-
-      overflow: hidden;
-
-      transition:
-        color 0.35s ease,
-        background 0.35s ease;
+      font-size: 11px;
+      letter-spacing: .06em;
+      padding: 9px 13px;
+      border-radius: 999px;
+      white-space: nowrap;
     }
 
-    .nav-item:hover {
+    .bottom-nav a:hover,
+    .bottom-nav a.active {
       color: var(--text);
-
-      background:
-        rgba(255, 255, 255, 0.025);
+      background: rgba(255,255,255,.06);
     }
-
-    .nav-item::after {
-      content: "";
-
-      position: absolute;
-
-      bottom: 0;
-      left: 0;
-
-      width: 100%;
-      height: 1px;
-
-      background: var(--accent);
-
-      transform: scaleX(0);
-
-      transform-origin: left;
-
-      transition:
-        transform 0.4s ease;
-    }
-
-    .nav-item:hover::after {
-      transform: scaleX(1);
-    }
-
-    .nav-number {
-      display: block;
-
-      color: var(--accent);
-
-      font-size: 9px;
-
-      letter-spacing: 0.15em;
-
-      margin-bottom: 12px;
-    }
-
-    .nav-title {
-      font-size: 13px;
-    }
-
-    /* =========================
-       ANIMATIONS
-    ========================= */
-
-    @keyframes fadeDown {
-      from {
-        opacity: 0;
-        transform: translateY(-15px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes starsMove {
-      from {
-        transform: translate(0, 0);
-      }
-
-      to {
-        transform: translate(-80px, 50px);
-      }
-    }
-
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-12px);
-      }
-    }
-
-    @keyframes rotateOrbit {
-      from {
-        transform:
-          translate(-50%, -50%)
-          rotateX(65deg)
-          rotateZ(0deg);
-      }
-
-      to {
-        transform:
-          translate(-50%, -50%)
-          rotateX(65deg)
-          rotateZ(360deg);
-      }
-    }
-
-    @keyframes rotateOrbitReverse {
-      from {
-        transform:
-          translate(-50%, -50%)
-          rotateX(65deg)
-          rotateY(45deg)
-          rotateZ(0deg);
-      }
-
-      to {
-        transform:
-          translate(-50%, -50%)
-          rotateX(65deg)
-          rotateY(45deg)
-          rotateZ(-360deg);
-      }
-    }
-
-    @keyframes breathe {
-      0%, 100% {
-        transform:
-          translate(-50%, -50%)
-          scale(1);
-      }
-
-      50% {
-        transform:
-          translate(-50%, -50%)
-          scale(1.04);
-      }
-    }
-
-    @keyframes signalPulse {
-      0%, 100% {
-        opacity: 0.1;
-        transform: scaleY(0.4);
-      }
-
-      50% {
-        opacity: 0.8;
-        transform: scaleY(1);
-      }
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
 
     @media (max-width: 800px) {
-
-      .page {
-        width:
-          min(100% - 32px, 600px);
+      .container {
+        padding: 24px 24px 120px;
       }
 
-      header {
-        height: 75px;
+      main {
+        padding-top: 65px;
       }
 
-      .intro {
-        padding: 70px 0 60px;
-      }
-
-      .profile {
+      .grid {
         grid-template-columns: 1fr;
+        gap: 50px;
+        margin-top: 55px;
+      }
 
+      .principle-grid {
+        grid-template-columns: 1fr;
         gap: 30px;
-
-        padding: 65px 0;
       }
 
-      .profile-visual {
-        min-height: 340px;
-
-        order: -1;
-      }
-
-      .orbit-system {
-        width: 300px;
-        height: 300px;
-      }
-
-      .orbit {
-        width: 275px;
-        height: 95px;
-      }
-
-      .orbit.two {
-        width: 240px;
-        height: 125px;
-      }
-
-      .orbit.three {
-        width: 205px;
-        height: 78px;
-      }
-
-      .center {
-        width: 90px;
-        height: 90px;
-      }
-
-      .principles {
-        padding: 65px 0;
-      }
-
-      .principles-header {
-        display: block;
-      }
-
-      .principles-header p {
-        margin-top: 20px;
-      }
-
-      .principles-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .principle {
-        min-height: 190px;
-      }
-
-      .principle h3 {
-        margin-top: 45px;
-      }
-
-      .navigation {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .nav-item:nth-child(2) {
-        border-right: 0;
-      }
-
-      .nav-item:nth-child(3) {
-        border-left: 0;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration:
-          0.01ms !important;
-
-        animation-iteration-count:
-          1 !important;
+      .bottom-nav {
+        max-width: calc(100vw - 20px);
+        overflow-x: auto;
       }
     }
   </style>
@@ -930,362 +247,118 @@
 
 <body>
 
-  <!-- =========================
-       BACKGROUND
-  ========================== -->
+  <div class="stars"></div>
 
-  <div class="space">
-
-    <div class="stars"></div>
-
-    <div class="glow"></div>
-
-  </div>
-
-
-  <div class="page">
-
-    <!-- =========================
-         HEADER
-    ========================== -->
+  <div class="container">
 
     <header>
-
-      <a
-        href="index.html"
-        class="logo"
-      >
-        A way to Mim
-      </a>
-
-      <a
-        href="index.html"
-        class="back"
-      >
-        ← Back to Mission Control
-      </a>
-
+      <a href="index.html" class="brand">A way to Mim</a>
+      <a href="index.html" class="back">← Mission Control</a>
     </header>
-
 
     <main>
 
-      <!-- =========================
-           INTRO
-      ========================== -->
+      <div class="eyebrow">Mission 02 — Identity / Human Behind the Signal</div>
 
-      <section class="intro">
+      <h1>About the<br>explorer.</h1>
 
-        <div class="mission">
-          Mission 02 — Identity / Human Behind the Signal
-        </div>
+      <p class="intro">
+        I’m Mohammad Siahbalaei — an R&amp;D specialist driven by curiosity,
+        experimentation and continuous learning. I like exploring difficult
+        questions, turning ideas into experiments, and learning from what
+        happens next.
+      </p>
 
-        <h1>
-          About<br />
-          the explorer.
-        </h1>
+      <div class="grid">
 
-        <p class="intro-description">
+        <section>
+          <div class="section-label">The signal</div>
 
-          I’m <strong>Mohammad Siahbalaei</strong> —
-          an R&amp;D specialist driven by curiosity,
-          experimentation and continuous learning.
-
-          <br /><br />
-
-          I’m interested in understanding how things work,
-          building better solutions and exploring the space
-          between an idea and something that actually works.
-
-        </p>
-
-      </section>
-
-
-      <!-- =========================
-           PROFILE
-      ========================== -->
-
-      <section class="profile">
-
-        <div class="profile-visual">
-
-          <div class="orbit-system">
-
-            <div class="orbit"></div>
-
-            <div class="orbit two"></div>
-
-            <div class="orbit three"></div>
-
-            <div class="center"></div>
-
-            <div class="signal"></div>
-
-            <div class="signal bottom"></div>
-
-          </div>
-
-        </div>
-
-
-        <div class="profile-content">
-
-          <div class="section-label">
-            <span>01</span>
-            Profile
-          </div>
-
-          <h2>
-            Curiosity is the
-            starting point.
-          </h2>
-
-          <p>
-
-            My work sits somewhere between
-            <strong>research, engineering and exploration.</strong>
-
-            I enjoy taking a problem apart,
-            understanding its fundamentals
-            and then finding a way to turn
-            that understanding into something useful.
-
+          <p class="text">
+            My work sits somewhere between research, engineering and discovery.
+            I’m interested in understanding how things work, building and
+            testing new ideas, and continuously improving through iteration.
           </p>
 
-          <p>
+          <br>
 
-            For me, learning is not a destination.
-            It is part of the process of building,
-            testing, failing, improving and trying again.
-
+          <p class="text">
+            Space and astronautics have always represented something more than
+            technology to me: exploration. That same mindset shapes the way I
+            approach research, learning and problem solving.
           </p>
+        </section>
 
-          <p>
+        <section class="data-panel">
 
-            Outside of work, I’m fascinated by
-            <strong>space, astronomy, technology
-            and the questions that make us look
-            beyond what we already know.</strong>
-
-          </p>
-
-
-          <div class="data-panel">
-
-            <div class="data-row">
-
-              <div class="data-key">
-                Role
-              </div>
-
-              <div class="data-value">
-                R&amp;D Specialist
-              </div>
-
-            </div>
-
-
-            <div class="data-row">
-
-              <div class="data-key">
-                Focus
-              </div>
-
-              <div class="data-value">
-                Research · Development · Problem Solving
-              </div>
-
-            </div>
-
-
-            <div class="data-row">
-
-              <div class="data-key">
-                Interests
-              </div>
-
-              <div class="data-value">
-                Space · Technology · Learning · Exploration
-              </div>
-
-            </div>
-
-
-            <div class="data-row">
-
-              <div class="data-key">
-                Current Mission
-              </div>
-
-              <div class="data-value">
-                Keep learning. Keep building. Keep exploring.
-              </div>
-
-            </div>
-
+          <div class="data-row">
+            <span>Role</span>
+            <span>R&amp;D Specialist</span>
           </div>
 
-        </div>
+          <div class="data-row">
+            <span>Focus</span>
+            <span>Research &amp; Development</span>
+          </div>
 
-      </section>
+          <div class="data-row">
+            <span>Interests</span>
+            <span>Space · Engineering · Learning</span>
+          </div>
 
+          <div class="data-row">
+            <span>Current Mission</span>
+            <span>Explore &amp; Build</span>
+          </div>
 
-      <!-- =========================
-           PRINCIPLES
-      ========================== -->
+        </section>
+
+      </div>
 
       <section class="principles">
 
-        <div class="principles-header">
+        <div class="section-label">Operating principles</div>
 
-          <h2>
-            How I operate.
-          </h2>
+        <div class="principle-grid">
 
-          <p>
-            A few principles that shape the way
-            I approach problems, projects and learning.
-          </p>
-
-        </div>
-
-
-        <div class="principles-grid">
-
-          <article class="principle">
-
-            <div class="principle-number">
-              01
-            </div>
-
-            <h3>
-              Stay Curious
-            </h3>
-
+          <div class="principle">
+            <div class="principle-number">01</div>
+            <h3>Stay Curious</h3>
             <p>
-              Ask better questions before
-              rushing toward answers.
+              Ask better questions before looking for easy answers.
             </p>
+          </div>
 
-          </article>
-
-
-          <article class="principle">
-
-            <div class="principle-number">
-              02
-            </div>
-
-            <h3>
-              Build &amp; Test
-            </h3>
-
+          <div class="principle">
+            <div class="principle-number">02</div>
+            <h3>Build &amp; Test</h3>
             <p>
-              Ideas become valuable when
-              they are turned into experiments.
+              Turn ideas into experiments and let reality provide feedback.
             </p>
+          </div>
 
-          </article>
-
-
-          <article class="principle">
-
-            <div class="principle-number">
-              03
-            </div>
-
-            <h3>
-              Keep Exploring
-            </h3>
-
+          <div class="principle">
+            <div class="principle-number">03</div>
+            <h3>Keep Exploring</h3>
             <p>
-              There is always something
-              beyond the current boundary.
+              Treat learning as an ongoing mission rather than a destination.
             </p>
-
-          </article>
+          </div>
 
         </div>
 
       </section>
-
-
-      <!-- =========================
-           NAVIGATION
-      ========================== -->
-
-      <nav class="navigation">
-
-        <a
-          href="index.html"
-          class="nav-item"
-        >
-
-          <span class="nav-number">
-            00
-          </span>
-
-          <span class="nav-title">
-            Mission Control
-          </span>
-
-        </a>
-
-
-        <a
-          href="about.html"
-          class="nav-item"
-        >
-
-          <span class="nav-number">
-            01
-          </span>
-
-          <span class="nav-title">
-            About
-          </span>
-
-        </a>
-
-
-        <a
-          href="projects.html"
-          class="nav-item"
-        >
-
-          <span class="nav-number">
-            02
-          </span>
-
-          <span class="nav-title">
-            Projects
-          </span>
-
-        </a>
-
-
-        <a
-          href="notes.html"
-          class="nav-item"
-        >
-
-          <span class="nav-number">
-            03
-          </span>
-
-          <span class="nav-title">
-            Notes
-          </span>
-
-        </a>
-
-      </nav>
 
     </main>
 
   </div>
 
+  <nav class="bottom-nav">
+    <a href="index.html">00 Mission Control</a>
+    <a href="about.html" class="active">01 About</a>
+    <a href="projects.html">02 Projects</a>
+    <a href="contact.html">04 Contact</a>
+  </nav>
 
 </body>
 </html>
