@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Projects — A way to Mim</title>
+
+  <style>
+    :root {
+      --bg: #04060b;
+      --text: #f4f6ff;
+      --muted: #7d8496;
+      --soft: #b8bfd2;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #91a4ff;
+      --accent-soft: rgba(145, 164, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .space {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle at 75% 20%,
+          rgba(70, 90, 190, 0.06),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 20% 80%,
+          rgba(90, 70, 180, 0.035),
+          transparent 32%
+        ),
+        #04060b;
+    }
+
+    .stars {
+      position: absolute;
+      inset: -20%;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.7) 1px,
+          transparent 1px
+        ),
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.28) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        145px 145px,
+        240px 240px;
+
+      background-position:
+        30px 20px,
+        110px 90px;
+
+      opacity: 0.12;
+
+      animation:
+        starsMove 60s linear infinite;
+    }
+
+    .glow {
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      top: -300px;
+      right: -250px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(91, 111, 255, 0.08),
+          transparent 68%
+        );
+
+      filter: blur(45px);
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      width: min(1180px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 90px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeDown 0.9s ease both;
+    }
+
+    .logo {
+      font-size: 13px;
+
+      letter-spacing: 0.18em;
+
+      color: var(--muted);
+
+      text-transform: uppercase;
+
+      text-decoration: none;
+    }
+
+    .back {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      font-size: 10px;
+
+      letter-spacing: 0.16em;
+
+      text-transform: uppercase;
+
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .back:hover {
+      color: var(--text);
+
+      transform: translateX(-3px);
+    }
+
+    /* =========================
+       INTRO
+    ========================= */
+
+    .intro {
+      padding: 95px 0 75px;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeUp 1s ease both;
+    }
+
+    .mission {
+      margin-bottom: 28px;
+
+      font-size: 10px;
+
+      color: var(--accent);
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+    .mission::before {
+      content: "";
+
+      display: inline-block;
+
+      width: 28px;
+      height: 1px;
+
+      margin-right: 12px;
+
+      vertical-align: middle;
+
+      background: var(--accent);
+
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size:
+        clamp(58px, 9vw, 112px);
+
+      line-height: 0.88;
+
+      letter-spacing: -0.065em;
+
+      font-weight: 500;
+    }
+
+    .intro-bottom {
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: space-between;
+
+      gap: 50px;
+
+      margin-top: 40px;
+    }
+
+    .intro-text {
+      max-width: 600px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.9;
+    }
+
+    .mission-count {
+      flex-shrink: 0;
+
+      color: var(--soft);
+
+      font-size: 11px;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+
+      text-align: right;
+    }
+
+    .mission-count strong {
+      display: block;
+
+      color: var(--accent);
+
+      font-size: 34px;
+
+      font-weight: 400;
+
+      letter-spacing: -0.04em;
+
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================= */
+
+    .projects {
+      padding: 75px 0 90px;
+    }
+
+    .projects-header {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 35px;
+    }
+
+    .section-label {
+      color: var(--accent);
+
+      font-size: 10px;
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+    }
+
+    .section-label span {
+      color: var(--muted);
+
+      margin-right: 10px;
+    }
+
+    .projects-header p {
+      color: var(--muted);
+
+      font-size: 11px;
+
+      letter-spacing: 0.08em;
+    }
+
+    /* =========================
+       PROJECT LIST
+    ========================= */
+
+    .project-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .project {
+      position: relative;
+
+      display: grid;
+
+      grid-template-columns: 100px 1fr 170px 30px;
+
+      align-items: center;
+
+      gap: 35px;
+
+      min-height: 190px;
+
+      padding: 30px 10px 30px 0;
+
+      border-bottom: 1px solid var(--line);
+
+      text-decoration: none;
+
+      color: var(--text);
+
+      overflow: hidden;
+
+      transition:
+        background 0.4s ease,
+        padding 0.4s ease;
+    }
+
+    .project::before {
+      content: "";
+
+      position: absolute;
+
+      left: -100px;
+      top: 0;
+
+      width: 100px;
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(145, 164, 255, 0.055)
+        );
+
+      transition:
+        left 0.55s ease;
+    }
+
+    .project:hover {
+      padding-left: 18px;
+
+      background:
+        rgba(145, 164, 255, 0.025);
+    }
+
+    .project:hover::before {
+      left: 0;
+    }
+
+    /* =========================
+       PROJECT NUMBER
+    ========================= */
+
+    .project-number {
+      position: relative;
+
+      color: var(--accent);
+
+      font-size: 11px;
+
+      letter-spacing: 0.15em;
+    }
+
+    .project-number::after {
+      content: "";
+
+      display: block;
+
+      width: 25px;
+      height: 1px;
+
+      margin-top: 12px;
+
+      background:
+        rgba(145, 164, 255, 0.35);
+    }
+
+    /* =========================
+       PROJECT MAIN
+    ========================= */
+
+    .project-main {
+      position: relative;
+    }
+
+    .project-title {
+      font-size: 27px;
+
+      font-weight: 400;
+
+      letter-spacing: -0.035em;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .project:hover .project-title {
+      transform: translateX(5px);
+    }
+
+    .project-description {
+      max-width: 600px;
+
+      margin-top: 12px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.75;
+    }
+
+    /* =========================
+       TAGS
+    ========================= */
+
+    .project-tags {
+      position: relative;
+
+      display: flex;
+
+      justify-content: flex-end;
+
+      flex-wrap: wrap;
+
+      gap: 6px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 100px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      letter-spacing: 0.06em;
+
+      white-space: nowrap;
+
+      transition:
+        border-color 0.3s ease,
+        color 0.3s ease;
+    }
+
+    .project:hover .tag {
+      border-color:
+        rgba(145, 164, 255, 0.22);
+
+      color: var(--soft);
+    }
+
+    /* =========================
+       ARROW
+    ========================= */
+
+    .project-arrow {
+      position: relative;
+
+      color: var(--muted);
+
+      font-size: 18px;
+
+      transition:
+        color 0.3s ease,
+        transform 0.4s ease;
+    }
+
+    .project:hover .project-arrow {
+      color: var(--text);
+
+      transform:
+        translate(4px, -4px);
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .project-status {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin-top: 17px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+
+      box-shadow:
+        0 0 8px
+        rgba(145, 164, 255, 0.6);
+    }
+
+    .status-dot.complete {
+      background: #9cffc7;
+
+      box-shadow:
+        0 0 8px
+        rgba(156, 255, 199, 0.6);
+    }
+
+    .status-dot.archive {
+      background: #777f91;
+
+      box-shadow: none;
+    }
+
+    /* =========================
+       BOTTOM NOTE
+    ========================= */
+
+    .project-note {
+      display: grid;
+
+      grid-template-columns:
+        100px 1fr;
+
+      gap: 35px;
+
+      padding: 35px 0;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .note-number {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      letter-spacing: 0.15em;
+    }
+
+    .note-text {
+      max-width: 650px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+    .note-text strong {
+      color: var(--soft);
+
+      font-weight: 400;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .navigation {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      border-left: 1px solid var(--line);
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-item {
+      position: relative;
+
+      padding: 28px 20px;
+
+      border-right: 1px solid var(--line);
+
+      text-decoration: none;
+
+      color: var(--muted);
+
+      overflow: hidden;
+
+      transition:
+        color 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .nav-item::after {
+      content: "";
+
+      position: absolute;
+
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background: var(--accent);
+
+      transform: scaleX(0);
+
+      transform-origin: left;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .nav-item:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-number {
+      display: block;
+
+      color: var(--accent);
+
+      font-size: 9px;
+
+      letter-spacing: 0.15em;
+
+      margin-bottom: 12px;
+    }
+
+    .nav-title {
+      font-size: 13px;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes starsMove {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(-80px, 50px);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .project {
+        grid-template-columns:
+          70px 1fr 30px;
+
+        gap: 20px;
+      }
+
+      .project-tags {
+        grid-column: 2 / 3;
+
+        justify-content: flex-start;
+      }
+
+      .project-arrow {
+        grid-column: 3;
+        grid-row: 1;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      .page {
+        width:
+          min(100% - 32px, 600px);
+      }
+
+      header {
+        height: 75px;
+      }
+
+      .intro {
+        padding:
+          70px 0 55px;
+      }
+
+      .intro-bottom {
+        display: block;
+      }
+
+      .mission-count {
+        margin-top: 30px;
+
+        text-align: left;
+      }
+
+      .mission-count strong {
+        display: inline;
+
+        margin-right: 8px;
+      }
+
+      .projects {
+        padding:
+          60px 0 70px;
+      }
+
+      .projects-header {
+        display: block;
+      }
+
+      .projects-header p {
+        margin-top: 12px;
+      }
+
+      .project {
+        grid-template-columns:
+          50px 1fr 25px;
+
+        gap: 15px;
+
+        min-height: 220px;
+
+        padding:
+          25px 0;
+      }
+
+      .project:hover {
+        padding-left: 8px;
+      }
+
+      .project-title {
+        font-size: 22px;
+      }
+
+      .project-description {
+        font-size: 12px;
+      }
+
+      .project-tags {
+        grid-column: 2 / 4;
+
+        justify-content: flex-start;
+      }
+
+      .project-arrow {
+        grid-column: 3;
+      }
+
+      .project-note {
+        grid-template-columns: 50px 1fr;
+
+        gap: 15px;
+      }
+
+      .navigation {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .nav-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .nav-item:nth-child(3) {
+        border-left: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       BACKGROUND
+  ========================== -->
+
+  <div class="space">
+
+    <div class="stars"></div>
+
+    <div class="glow"></div>
+
+  </div>
+
+
+  <div class="page">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        A way to Mim
+      </a>
+
+      <a
+        href="index.html"
+        class="back"
+      >
+        ← Back to Mission Control
+      </a>
+
+    </header>
+
+
+    <main>
+
+      <!-- =========================
+           INTRO
+      ========================== -->
+
+      <section class="intro">
+
+        <div class="mission">
+          Mission 03 — Research / Build / Explore
+        </div>
+
+        <h1>
+          Things<br />
+          I've built.
+        </h1>
+
+        <div class="intro-bottom">
+
+          <p class="intro-text">
+            A collection of experiments, research,
+            technical work and ideas turned into
+            something tangible.
+
+            <br /><br />
+
+            Some missions are complete.
+            Some are still in orbit.
+          </p>
+
+          <div class="mission-count">
+
+            <strong>04</strong>
+
+            Mission Files
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           PROJECTS
+      ========================== -->
+
+      <section class="projects">
+
+        <div class="projects-header">
+
+          <div class="section-label">
+            <span>01</span>
+            Mission Archive
+          </div>
+
+          <p>
+            SELECTED WORK / EXPERIMENTS
+          </p>
+
+        </div>
+
+
+        <div class="project-list">
+
+
+          <!-- PROJECT 01 -->
+
+          <a
+            href="#"
+            class="project"
+          >
+
+            <div class="project-number">
+              M-001
+            </div>
+
+            <div class="project-main">
+
+              <h2 class="project-title">
+                Research Project Alpha
+              </h2>
+
+              <p class="project-description">
+                An experimental R&amp;D project focused
+                on exploring a technical problem,
+                testing possible approaches and
+                developing a working solution.
+              </p>
+
+              <div class="project-status">
+
+                <span class="status-dot complete"></span>
+
+                Completed
+
+              </div>
+
+            </div>
+
+            <div class="project-tags">
+
+              <span class="tag">
+                R&amp;D
+              </span>
+
+              <span class="tag">
+                Research
+              </span>
+
+              <span class="tag">
+                Development
+              </span>
+
+            </div>
+
+            <div class="project-arrow">
+              ↗
+            </div>
+
+          </a>
+
+
+          <!-- PROJECT 02 -->
+
+          <a
+            href="#"
+            class="project"
+          >
+
+            <div class="project-number">
+              M-002
+            </div>
+
+            <div class="project-main">
+
+              <h2 class="project-title">
+                Experimental System
+              </h2>
+
+              <p class="project-description">
+                A hands-on experiment designed to
+                understand, prototype and validate
+                a new technical concept.
+              </p>
+
+              <div class="project-status">
+
+                <span class="status-dot"></span>
+
+                In Development
+
+              </div>
+
+            </div>
+
+            <div class="project-tags">
+
+              <span class="tag">
+                Prototype
+              </span>
+
+              <span class="tag">
+                Engineering
+              </span>
+
+              <span class="tag">
+                Testing
+              </span>
+
+            </div>
+
+            <div class="project-arrow">
+              ↗
+            </div>
+
+          </a>
+
+
+          <!-- PROJECT 03 -->
+
+          <a
+            href="#"
+            class="project"
+          >
+
+            <div class="project-number">
+              M-003
+            </div>
+
+            <div class="project-main">
+
+              <h2 class="project-title">
+                Data &amp; Analysis
+              </h2>
+
+              <p class="project-description">
+                A project focused on collecting,
+                analyzing and transforming information
+                into useful technical insight.
+              </p>
+
+              <div class="project-status">
+
+                <span class="status-dot complete"></span>
+
+                Completed
+
+              </div>
+
+            </div>
+
+            <div class="project-tags">
+
+              <span class="tag">
+                Data
+              </span>
+
+              <span class="tag">
+                Analysis
+              </span>
+
+              <span class="tag">
+                Research
+              </span>
+
+            </div>
+
+            <div class="project-arrow">
+              ↗
+            </div>
+
+          </a>
+
+
+          <!-- PROJECT 04 -->
+
+          <a
+            href="#"
+            class="project"
+          >
+
+            <div class="project-number">
+              M-004
+            </div>
+
+            <div class="project-main">
+
+              <h2 class="project-title">
+                The Next Experiment
+              </h2>
+
+              <p class="project-description">
+                Not every mission has a destination yet.
+                Some ideas are still being explored,
+                tested and shaped into something real.
+              </p>
+
+              <div class="project-status">
+
+                <span class="status-dot archive"></span>
+
+                Exploring
+
+              </div>
+
+            </div>
+
+            <div class="project-tags">
+
+              <span class="tag">
+                Exploration
+              </span>
+
+              <span class="tag">
+                Ideas
+              </span>
+
+              <span class="tag">
+                Future
+              </span>
+
+            </div>
+
+            <div class="project-arrow">
+              ↗
+            </div>
+
+          </a>
+
+
+        </div>
+
+
+        <!-- =========================
+             NOTE
+        ========================== -->
+
+        <div class="project-note">
+
+          <div class="note-number">
+            LOG
+          </div>
+
+          <p class="note-text">
+            <strong>
+              Projects are not just finished products.
+            </strong>
+
+            They are records of questions,
+            experiments, failures, iterations
+            and things learned along the way.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           NAVIGATION
+      ========================== -->
+
+      <nav class="navigation">
+
+        <a
+          href="index.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            00
+          </span>
+
+          <span class="nav-title">
+            Mission Control
+          </span>
+
+        </a>
+
+
+        <a
+          href="about.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            01
+          </span>
+
+          <span class="nav-title">
+            About
+          </span>
+
+        </a>
+
+
+        <a
+          href="projects.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            02
+          </span>
+
+          <span class="nav-title">
+            Projects
+          </span>
+
+        </a>
+
+
+        <a
+          href="contact.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            04
+          </span>
+
+          <span class="nav-title">
+            Contact
+          </span>
+
+        </a>
+
+      </nav>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

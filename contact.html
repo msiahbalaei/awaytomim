@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Contact — A way to Mim</title>
+
+  <style>
+    :root {
+      --bg: #04060b;
+      --text: #f4f6ff;
+      --muted: #7d8496;
+      --soft: #b8bfd2;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #91a4ff;
+      --accent-soft: rgba(145, 164, 255, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .space {
+      position: fixed;
+      inset: 0;
+
+      z-index: -1;
+
+      overflow: hidden;
+
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(75, 95, 190, 0.06),
+          transparent 38%
+        ),
+        #04060b;
+    }
+
+    .stars {
+      position: absolute;
+      inset: -20%;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.7) 1px,
+          transparent 1px
+        ),
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.3) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        145px 145px,
+        240px 240px;
+
+      background-position:
+        30px 20px,
+        110px 90px;
+
+      opacity: 0.12;
+
+      animation:
+        starsMove 60s linear infinite;
+    }
+
+    .glow {
+      position: absolute;
+
+      width: 700px;
+      height: 700px;
+
+      left: 50%;
+      top: 42%;
+
+      transform: translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(100, 120, 255, 0.07),
+          transparent 68%
+        );
+
+      filter: blur(45px);
+
+      animation:
+        glowPulse 8s ease-in-out infinite;
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      width: min(1180px, calc(100% - 48px));
+
+      margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 90px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeDown 0.9s ease both;
+    }
+
+    .logo {
+      font-size: 13px;
+
+      letter-spacing: 0.18em;
+
+      color: var(--muted);
+
+      text-transform: uppercase;
+
+      text-decoration: none;
+    }
+
+    .back {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      font-size: 10px;
+
+      letter-spacing: 0.16em;
+
+      text-transform: uppercase;
+
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .back:hover {
+      color: var(--text);
+
+      transform: translateX(-3px);
+    }
+
+    /* =========================
+       INTRO
+    ========================= */
+
+    .intro {
+      padding: 95px 0 70px;
+
+      text-align: center;
+
+      animation:
+        fadeUp 1s ease both;
+    }
+
+    .mission {
+      margin-bottom: 28px;
+
+      font-size: 10px;
+
+      color: var(--accent);
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+    .mission::before {
+      content: "";
+
+      display: inline-block;
+
+      width: 28px;
+      height: 1px;
+
+      margin-right: 12px;
+
+      vertical-align: middle;
+
+      background: var(--accent);
+
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size:
+        clamp(55px, 9vw, 110px);
+
+      line-height: 0.88;
+
+      letter-spacing: -0.065em;
+
+      font-weight: 500;
+    }
+
+    .intro-text {
+      max-width: 540px;
+
+      margin: 35px auto 0;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.9;
+    }
+
+    /* =========================
+       SIGNAL
+    ========================= */
+
+    .signal-system {
+      position: relative;
+
+      height: 90px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      margin-bottom: 35px;
+    }
+
+    .signal-line {
+      width: 100%;
+      max-width: 600px;
+
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(145, 164, 255, 0.3),
+          transparent
+        );
+
+      position: relative;
+    }
+
+    .signal-pulse {
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: #dce4ff;
+
+      box-shadow:
+        0 0 12px rgba(145, 164, 255, 0.9),
+        0 0 30px rgba(145, 164, 255, 0.4);
+
+      transform:
+        translate(-50%, -50%);
+
+      animation:
+        signalTravel 4s ease-in-out infinite;
+    }
+
+    /* =========================
+       CONTACT GRID
+    ========================= */
+
+    .contact-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      border-top: 1px solid var(--line);
+
+      border-left: 1px solid var(--line);
+
+      animation:
+        fadeUp 1s ease both;
+
+      animation-delay: 0.2s;
+    }
+
+    .contact-card {
+      position: relative;
+
+      min-height: 245px;
+
+      padding: 30px;
+
+      border-right: 1px solid var(--line);
+
+      border-bottom: 1px solid var(--line);
+
+      text-decoration: none;
+
+      color: var(--text);
+
+      overflow: hidden;
+
+      transition:
+        background 0.4s ease,
+        transform 0.4s ease;
+    }
+
+    .contact-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      right: -80px;
+      bottom: -90px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(145, 164, 255, 0.1),
+          transparent 70%
+        );
+
+      opacity: 0;
+
+      transition:
+        opacity 0.5s ease;
+    }
+
+    .contact-card:hover {
+      background:
+        rgba(145, 164, 255, 0.035);
+
+      transform: translateY(-3px);
+    }
+
+    .contact-card:hover::before {
+      opacity: 1;
+    }
+
+    .contact-number {
+      color: var(--accent);
+
+      font-size: 9px;
+
+      letter-spacing: 0.18em;
+    }
+
+    .contact-icon {
+      position: absolute;
+
+      right: 30px;
+      top: 28px;
+
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+
+      place-items: center;
+
+      border: 1px solid var(--line);
+
+      border-radius: 50%;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      transition:
+        border-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .contact-card:hover .contact-icon {
+      border-color:
+        rgba(145, 164, 255, 0.4);
+
+      color: var(--text);
+
+      transform: rotate(8deg);
+    }
+
+    .contact-title {
+      margin-top: 68px;
+
+      font-size: 24px;
+
+      font-weight: 400;
+
+      letter-spacing: -0.025em;
+    }
+
+    .contact-description {
+      margin-top: 12px;
+
+      max-width: 330px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+    .contact-link {
+      display: inline-block;
+
+      margin-top: 22px;
+
+      color: var(--soft);
+
+      font-size: 11px;
+
+      letter-spacing: 0.04em;
+
+      word-break: break-word;
+    }
+
+    /* =========================
+       AVAILABILITY
+    ========================= */
+
+    .availability {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 30px;
+
+      padding: 45px 0;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeUp 1s ease both;
+
+      animation-delay: 0.4s;
+    }
+
+    .availability-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+    }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: #9cffc7;
+
+      box-shadow:
+        0 0 12px
+        rgba(156, 255, 199, 0.75);
+
+      animation:
+        pulse 2.5s ease-in-out infinite;
+    }
+
+    .availability-title {
+      color: var(--soft);
+
+      font-size: 13px;
+    }
+
+    .availability-text {
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.7;
+
+      text-align: right;
+    }
+
+    /* =========================
+       FOOTER NAV
+    ========================= */
+
+    .navigation {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      border-left: 1px solid var(--line);
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-item {
+      position: relative;
+
+      padding: 28px 20px;
+
+      border-right: 1px solid var(--line);
+
+      text-decoration: none;
+
+      color: var(--muted);
+
+      overflow: hidden;
+
+      transition:
+        color 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .nav-item::after {
+      content: "";
+
+      position: absolute;
+
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background: var(--accent);
+
+      transform: scaleX(0);
+
+      transform-origin: left;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .nav-item:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-number {
+      display: block;
+
+      color: var(--accent);
+
+      font-size: 9px;
+
+      letter-spacing: 0.15em;
+
+      margin-bottom: 12px;
+    }
+
+    .nav-title {
+      font-size: 13px;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+    }
+
+    @keyframes starsMove {
+      from {
+        transform:
+          translate(0, 0);
+      }
+
+      to {
+        transform:
+          translate(-80px, 50px);
+      }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        opacity: 0.5;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      50% {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1.12);
+      }
+    }
+
+    @keyframes signalTravel {
+      0% {
+        left: 15%;
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      50% {
+        left: 50%;
+        opacity: 1;
+      }
+
+      85% {
+        opacity: 1;
+      }
+
+      100% {
+        left: 85%;
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .page {
+        width:
+          min(100% - 32px, 600px);
+      }
+
+      header {
+        height: 75px;
+      }
+
+      .intro {
+        padding:
+          70px 0 55px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        min-height: 220px;
+      }
+
+      .availability {
+        display: block;
+      }
+
+      .availability-text {
+        margin-top: 16px;
+
+        text-align: left;
+      }
+
+      .navigation {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .nav-item:nth-child(2) {
+        border-right: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       BACKGROUND
+  ========================== -->
+
+  <div class="space">
+
+    <div class="stars"></div>
+
+    <div class="glow"></div>
+
+  </div>
+
+
+  <div class="page">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        A way to Mim
+      </a>
+
+      <a
+        href="index.html"
+        class="back"
+      >
+        ← Back to Mission Control
+      </a>
+
+    </header>
+
+
+    <main>
+
+      <!-- =========================
+           INTRO
+      ========================== -->
+
+      <section class="intro">
+
+        <div class="mission">
+          Mission 04 — Establish Connection
+        </div>
+
+        <h1>
+          Let's<br />
+          connect.
+        </h1>
+
+        <p class="intro-text">
+          Have an idea, a project, a question,
+          or simply want to say hello?
+
+          <br />
+
+          Choose your preferred channel and
+          send a signal my way.
+        </p>
+
+      </section>
+
+
+      <!-- =========================
+           SIGNAL
+      ========================== -->
+
+      <div class="signal-system">
+
+        <div class="signal-line">
+
+          <div class="signal-pulse"></div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           CONTACT METHODS
+      ========================== -->
+
+      <section class="contact-grid">
+
+
+        <!-- EMAIL -->
+
+        <a
+          href="mailto:YOUR_EMAIL@example.com"
+          class="contact-card"
+        >
+
+          <span class="contact-number">
+            01 / DIRECT
+          </span>
+
+          <span class="contact-icon">
+            @
+          </span>
+
+          <h2 class="contact-title">
+            Email
+          </h2>
+
+          <p class="contact-description">
+            For professional conversations,
+            collaborations, ideas and longer messages.
+          </p>
+
+          <span class="contact-link">
+            YOUR_EMAIL@example.com
+          </span>
+
+        </a>
+
+
+        <!-- TELEGRAM -->
+
+        <a
+          href="https://t.me/YOUR_USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card"
+        >
+
+          <span class="contact-number">
+            02 / SIGNAL
+          </span>
+
+          <span class="contact-icon">
+            ↗
+          </span>
+
+          <h2 class="contact-title">
+            Telegram
+          </h2>
+
+          <p class="contact-description">
+            For quick conversations,
+            questions and direct communication.
+          </p>
+
+          <span class="contact-link">
+            @YOUR_USERNAME
+          </span>
+
+        </a>
+
+
+        <!-- INSTAGRAM -->
+
+        <a
+          href="https://instagram.com/YOUR_USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card"
+        >
+
+          <span class="contact-number">
+            03 / SOCIAL
+          </span>
+
+          <span class="contact-icon">
+            ↗
+          </span>
+
+          <h2 class="contact-title">
+            Instagram
+          </h2>
+
+          <p class="contact-description">
+            A more visual window into
+            what I do, see and find interesting.
+          </p>
+
+          <span class="contact-link">
+            @YOUR_USERNAME
+          </span>
+
+        </a>
+
+
+        <!-- LINKEDIN -->
+
+        <a
+          href="https://linkedin.com/in/YOUR_USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-card"
+        >
+
+          <span class="contact-number">
+            04 / PROFESSIONAL
+          </span>
+
+          <span class="contact-icon">
+            ↗
+          </span>
+
+          <h2 class="contact-title">
+            LinkedIn
+          </h2>
+
+          <p class="contact-description">
+            For professional connections,
+            career-related conversations and networking.
+          </p>
+
+          <span class="contact-link">
+            linkedin.com/in/YOUR_USERNAME
+          </span>
+
+        </a>
+
+
+      </section>
+
+
+      <!-- =========================
+           AVAILABILITY
+      ========================== -->
+
+      <section class="availability">
+
+        <div class="availability-left">
+
+          <span class="online-dot"></span>
+
+          <span class="availability-title">
+            Open to new conversations
+          </span>
+
+        </div>
+
+        <p class="availability-text">
+          No formal protocol required.<br />
+          Just send a signal.
+        </p>
+
+      </section>
+
+
+      <!-- =========================
+           NAVIGATION
+      ========================== -->
+
+      <nav class="navigation">
+
+        <a
+          href="index.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            00
+          </span>
+
+          <span class="nav-title">
+            Mission Control
+          </span>
+
+        </a>
+
+
+        <a
+          href="about.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            01
+          </span>
+
+          <span class="nav-title">
+            About
+          </span>
+
+        </a>
+
+
+        <a
+          href="projects.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            02
+          </span>
+
+          <span class="nav-title">
+            Projects
+          </span>
+
+        </a>
+
+
+        <a
+          href="notes.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            03
+          </span>
+
+          <span class="nav-title">
+            Notes
+          </span>
+
+        </a>
+
+      </nav>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About — A way to Mim</title>
+
+  <style>
+    :root {
+      --bg: #04060b;
+      --panel: rgba(255, 255, 255, 0.025);
+      --text: #f4f6ff;
+      --muted: #7d8496;
+      --soft: #b8bfd2;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #91a4ff;
+      --accent-soft: rgba(145, 164, 255, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .space {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(70, 90, 190, 0.06),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 15% 80%,
+          rgba(90, 70, 180, 0.035),
+          transparent 30%
+        ),
+        #04060b;
+    }
+
+    .stars {
+      position: absolute;
+      inset: -20%;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.7) 1px,
+          transparent 1px
+        ),
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.28) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        145px 145px,
+        240px 240px;
+
+      background-position:
+        30px 20px,
+        110px 90px;
+
+      opacity: 0.12;
+
+      animation:
+        starsMove 60s linear infinite;
+    }
+
+    .glow {
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      top: -300px;
+      right: -250px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(91, 111, 255, 0.08),
+          transparent 68%
+        );
+
+      filter: blur(40px);
+    }
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .page {
+      width: min(1180px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 90px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeDown 0.9s ease both;
+    }
+
+    .logo {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .back {
+      color: var(--muted);
+      text-decoration: none;
+
+      font-size: 10px;
+
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+
+      transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .back:hover {
+      color: var(--text);
+      transform: translateX(-3px);
+    }
+
+    /* =========================
+       PAGE INTRO
+    ========================= */
+
+    .intro {
+      padding: 100px 0 80px;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeUp 1s ease both;
+
+      animation-delay: 0.1s;
+    }
+
+    .mission {
+      margin-bottom: 28px;
+
+      font-size: 10px;
+
+      color: var(--accent);
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+    .mission::before {
+      content: "";
+
+      display: inline-block;
+
+      width: 28px;
+      height: 1px;
+
+      margin-right: 12px;
+
+      vertical-align: middle;
+
+      background: var(--accent);
+
+      opacity: 0.7;
+    }
+
+    h1 {
+      max-width: 900px;
+
+      font-size:
+        clamp(55px, 9vw, 115px);
+
+      line-height: 0.88;
+
+      letter-spacing: -0.065em;
+
+      font-weight: 500;
+    }
+
+    .intro-description {
+      max-width: 620px;
+
+      margin-top: 38px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.9;
+    }
+
+    .intro-description strong {
+      color: var(--soft);
+      font-weight: 400;
+    }
+
+    /* =========================
+       PROFILE GRID
+    ========================= */
+
+    .profile {
+      display: grid;
+
+      grid-template-columns:
+        0.8fr 1.2fr;
+
+      gap: 80px;
+
+      padding: 90px 0;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      font-size: 10px;
+
+      color: var(--accent);
+
+      letter-spacing: 0.18em;
+
+      text-transform: uppercase;
+    }
+
+    .section-label span {
+      color: var(--muted);
+      margin-right: 10px;
+    }
+
+    .profile-content h2 {
+      font-size: clamp(30px, 4vw, 48px);
+
+      line-height: 1.05;
+
+      letter-spacing: -0.04em;
+
+      font-weight: 400;
+
+      margin-bottom: 30px;
+    }
+
+    .profile-content p {
+      max-width: 650px;
+
+      color: var(--muted);
+
+      font-size: 16px;
+
+      line-height: 1.9;
+
+      margin-bottom: 22px;
+    }
+
+    .profile-content p strong {
+      color: var(--soft);
+      font-weight: 400;
+    }
+
+    /* =========================
+       DATA PANEL
+    ========================= */
+
+    .data-panel {
+      margin-top: 45px;
+
+      border-top: 1px solid var(--line);
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .data-row {
+      display: grid;
+
+      grid-template-columns: 150px 1fr;
+
+      gap: 20px;
+
+      padding: 18px 0;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .data-row:last-child {
+      border-bottom: 0;
+    }
+
+    .data-key {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+    }
+
+    .data-value {
+      color: var(--soft);
+
+      font-size: 13px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       ORBIT VISUAL
+    ========================= */
+
+    .profile-visual {
+      min-height: 420px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .orbit-system {
+      position: relative;
+
+      width: 360px;
+      height: 360px;
+
+      animation:
+        float 8s ease-in-out infinite;
+    }
+
+    .orbit {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: 330px;
+      height: 110px;
+
+      border:
+        1px solid
+        rgba(145, 164, 255, 0.16);
+
+      border-radius: 50%;
+
+      transform:
+        translate(-50%, -50%)
+        rotateX(65deg)
+        rotateZ(20deg);
+
+      animation:
+        rotateOrbit 20s linear infinite;
+    }
+
+    .orbit.two {
+      width: 280px;
+      height: 150px;
+
+      border-color:
+        rgba(255, 255, 255, 0.08);
+
+      transform:
+        translate(-50%, -50%)
+        rotateX(65deg)
+        rotateY(45deg);
+
+      animation:
+        rotateOrbitReverse 26s linear infinite;
+    }
+
+    .orbit.three {
+      width: 240px;
+      height: 90px;
+
+      border-color:
+        rgba(145, 164, 255, 0.1);
+
+      transform:
+        translate(-50%, -50%)
+        rotateX(65deg)
+        rotateY(-35deg);
+
+      animation:
+        rotateOrbit 15s linear infinite reverse;
+    }
+
+    .center {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: 110px;
+      height: 110px;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #e7ebff,
+          #9aa9ff 15%,
+          #414b73 35%,
+          #111525 65%,
+          #05070d
+        );
+
+      box-shadow:
+        0 0 40px
+          rgba(130, 150, 255, 0.2),
+        0 0 100px
+          rgba(100, 120, 255, 0.06),
+        inset -15px -18px 25px
+          rgba(0, 0, 0, 0.7);
+
+      animation:
+        breathe 5s ease-in-out infinite;
+
+      z-index: 5;
+    }
+
+    .center::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 12px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+    }
+
+    .center::after {
+      content: "";
+
+      position: absolute;
+
+      width: 18px;
+      height: 18px;
+
+      top: 25%;
+      left: 30%;
+
+      border-radius: 50%;
+
+      background: white;
+
+      filter: blur(6px);
+
+      opacity: 0.5;
+    }
+
+    .signal {
+      position: absolute;
+
+      width: 1px;
+      height: 60px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          rgba(145, 164, 255, 0.8),
+          transparent
+        );
+
+      left: 50%;
+      top: 4%;
+
+      opacity: 0.35;
+
+      animation:
+        signalPulse 3s ease-in-out infinite;
+    }
+
+    .signal.bottom {
+      top: auto;
+      bottom: 5%;
+
+      animation-delay: 1.5s;
+    }
+
+    /* =========================
+       PRINCIPLES
+    ========================= */
+
+    .principles {
+      padding: 90px 0;
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .principles-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+      gap: 40px;
+
+      margin-bottom: 50px;
+    }
+
+    .principles-header h2 {
+      font-size: clamp(32px, 5vw, 58px);
+
+      font-weight: 400;
+
+      letter-spacing: -0.05em;
+    }
+
+    .principles-header p {
+      max-width: 360px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+    .principles-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .principle {
+      min-height: 230px;
+
+      padding: 30px;
+
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+
+      transition:
+        background 0.4s ease,
+        transform 0.4s ease;
+    }
+
+    .principle:hover {
+      background:
+        rgba(145, 164, 255, 0.035);
+
+      transform: translateY(-3px);
+    }
+
+    .principle-number {
+      color: var(--accent);
+
+      font-size: 10px;
+
+      letter-spacing: 0.16em;
+    }
+
+    .principle h3 {
+      margin-top: 65px;
+
+      font-size: 20px;
+
+      font-weight: 400;
+
+      letter-spacing: -0.02em;
+    }
+
+    .principle p {
+      margin-top: 14px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.7;
+    }
+
+    /* =========================
+       FOOTER NAV
+    ========================= */
+
+    .navigation {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      border-left: 1px solid var(--line);
+
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-item {
+      position: relative;
+
+      padding: 28px 20px;
+
+      border-right: 1px solid var(--line);
+
+      text-decoration: none;
+
+      color: var(--muted);
+
+      overflow: hidden;
+
+      transition:
+        color 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .nav-item::after {
+      content: "";
+
+      position: absolute;
+
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background: var(--accent);
+
+      transform: scaleX(0);
+
+      transform-origin: left;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .nav-item:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-number {
+      display: block;
+
+      color: var(--accent);
+
+      font-size: 9px;
+
+      letter-spacing: 0.15em;
+
+      margin-bottom: 12px;
+    }
+
+    .nav-title {
+      font-size: 13px;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================= */
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes starsMove {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(-80px, 50px);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    @keyframes rotateOrbit {
+      from {
+        transform:
+          translate(-50%, -50%)
+          rotateX(65deg)
+          rotateZ(0deg);
+      }
+
+      to {
+        transform:
+          translate(-50%, -50%)
+          rotateX(65deg)
+          rotateZ(360deg);
+      }
+    }
+
+    @keyframes rotateOrbitReverse {
+      from {
+        transform:
+          translate(-50%, -50%)
+          rotateX(65deg)
+          rotateY(45deg)
+          rotateZ(0deg);
+      }
+
+      to {
+        transform:
+          translate(-50%, -50%)
+          rotateX(65deg)
+          rotateY(45deg)
+          rotateZ(-360deg);
+      }
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      50% {
+        transform:
+          translate(-50%, -50%)
+          scale(1.04);
+      }
+    }
+
+    @keyframes signalPulse {
+      0%, 100% {
+        opacity: 0.1;
+        transform: scaleY(0.4);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: scaleY(1);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .page {
+        width:
+          min(100% - 32px, 600px);
+      }
+
+      header {
+        height: 75px;
+      }
+
+      .intro {
+        padding: 70px 0 60px;
+      }
+
+      .profile {
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+        padding: 65px 0;
+      }
+
+      .profile-visual {
+        min-height: 340px;
+
+        order: -1;
+      }
+
+      .orbit-system {
+        width: 300px;
+        height: 300px;
+      }
+
+      .orbit {
+        width: 275px;
+        height: 95px;
+      }
+
+      .orbit.two {
+        width: 240px;
+        height: 125px;
+      }
+
+      .orbit.three {
+        width: 205px;
+        height: 78px;
+      }
+
+      .center {
+        width: 90px;
+        height: 90px;
+      }
+
+      .principles {
+        padding: 65px 0;
+      }
+
+      .principles-header {
+        display: block;
+      }
+
+      .principles-header p {
+        margin-top: 20px;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .principle {
+        min-height: 190px;
+      }
+
+      .principle h3 {
+        margin-top: 45px;
+      }
+
+      .navigation {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .nav-item:nth-child(3) {
+        border-left: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       BACKGROUND
+  ========================== -->
+
+  <div class="space">
+
+    <div class="stars"></div>
+
+    <div class="glow"></div>
+
+  </div>
+
+
+  <div class="page">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        A way to Mim
+      </a>
+
+      <a
+        href="index.html"
+        class="back"
+      >
+        ← Back to Mission Control
+      </a>
+
+    </header>
+
+
+    <main>
+
+      <!-- =========================
+           INTRO
+      ========================== -->
+
+      <section class="intro">
+
+        <div class="mission">
+          Mission 02 — Identity / Human Behind the Signal
+        </div>
+
+        <h1>
+          About<br />
+          the explorer.
+        </h1>
+
+        <p class="intro-description">
+
+          I’m <strong>Mohammad Siahbalaei</strong> —
+          an R&amp;D specialist driven by curiosity,
+          experimentation and continuous learning.
+
+          <br /><br />
+
+          I’m interested in understanding how things work,
+          building better solutions and exploring the space
+          between an idea and something that actually works.
+
+        </p>
+
+      </section>
+
+
+      <!-- =========================
+           PROFILE
+      ========================== -->
+
+      <section class="profile">
+
+        <div class="profile-visual">
+
+          <div class="orbit-system">
+
+            <div class="orbit"></div>
+
+            <div class="orbit two"></div>
+
+            <div class="orbit three"></div>
+
+            <div class="center"></div>
+
+            <div class="signal"></div>
+
+            <div class="signal bottom"></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="profile-content">
+
+          <div class="section-label">
+            <span>01</span>
+            Profile
+          </div>
+
+          <h2>
+            Curiosity is the
+            starting point.
+          </h2>
+
+          <p>
+
+            My work sits somewhere between
+            <strong>research, engineering and exploration.</strong>
+
+            I enjoy taking a problem apart,
+            understanding its fundamentals
+            and then finding a way to turn
+            that understanding into something useful.
+
+          </p>
+
+          <p>
+
+            For me, learning is not a destination.
+            It is part of the process of building,
+            testing, failing, improving and trying again.
+
+          </p>
+
+          <p>
+
+            Outside of work, I’m fascinated by
+            <strong>space, astronomy, technology
+            and the questions that make us look
+            beyond what we already know.</strong>
+
+          </p>
+
+
+          <div class="data-panel">
+
+            <div class="data-row">
+
+              <div class="data-key">
+                Role
+              </div>
+
+              <div class="data-value">
+                R&amp;D Specialist
+              </div>
+
+            </div>
+
+
+            <div class="data-row">
+
+              <div class="data-key">
+                Focus
+              </div>
+
+              <div class="data-value">
+                Research · Development · Problem Solving
+              </div>
+
+            </div>
+
+
+            <div class="data-row">
+
+              <div class="data-key">
+                Interests
+              </div>
+
+              <div class="data-value">
+                Space · Technology · Learning · Exploration
+              </div>
+
+            </div>
+
+
+            <div class="data-row">
+
+              <div class="data-key">
+                Current Mission
+              </div>
+
+              <div class="data-value">
+                Keep learning. Keep building. Keep exploring.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           PRINCIPLES
+      ========================== -->
+
+      <section class="principles">
+
+        <div class="principles-header">
+
+          <h2>
+            How I operate.
+          </h2>
+
+          <p>
+            A few principles that shape the way
+            I approach problems, projects and learning.
+          </p>
+
+        </div>
+
+
+        <div class="principles-grid">
+
+          <article class="principle">
+
+            <div class="principle-number">
+              01
+            </div>
+
+            <h3>
+              Stay Curious
+            </h3>
+
+            <p>
+              Ask better questions before
+              rushing toward answers.
+            </p>
+
+          </article>
+
+
+          <article class="principle">
+
+            <div class="principle-number">
+              02
+            </div>
+
+            <h3>
+              Build &amp; Test
+            </h3>
+
+            <p>
+              Ideas become valuable when
+              they are turned into experiments.
+            </p>
+
+          </article>
+
+
+          <article class="principle">
+
+            <div class="principle-number">
+              03
+            </div>
+
+            <h3>
+              Keep Exploring
+            </h3>
+
+            <p>
+              There is always something
+              beyond the current boundary.
+            </p>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           NAVIGATION
+      ========================== -->
+
+      <nav class="navigation">
+
+        <a
+          href="index.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            00
+          </span>
+
+          <span class="nav-title">
+            Mission Control
+          </span>
+
+        </a>
+
+
+        <a
+          href="about.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            01
+          </span>
+
+          <span class="nav-title">
+            About
+          </span>
+
+        </a>
+
+
+        <a
+          href="projects.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            02
+          </span>
+
+          <span class="nav-title">
+            Projects
+          </span>
+
+        </a>
+
+
+        <a
+          href="notes.html"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            03
+          </span>
+
+          <span class="nav-title">
+            Notes
+          </span>
+
+        </a>
+
+      </nav>
+
+    </main>
+
+  </div>
+
+
+</body>
+</html>

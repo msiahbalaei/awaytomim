@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>A way to Mim — Mohammad Siahbalaei</title>
+
+  <style>
+    :root {
+      --bg: #04060b;
+      --text: #f4f6ff;
+      --muted: #7d8496;
+      --line: rgba(255, 255, 255, 0.08);
+      --accent: #91a4ff;
+      --accent-bright: #cbd4ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* =====================================================
+       BACKGROUND
+    ===================================================== */
+
+    .space {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 70% 35%,
+          rgba(70, 90, 190, 0.055),
+          transparent 35%
+        ),
+        #04060b;
+    }
+
+    .stars {
+      position: absolute;
+      inset: -20%;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.75) 1px,
+          transparent 1px
+        ),
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.35) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        140px 140px,
+        230px 230px;
+
+      background-position:
+        20px 30px,
+        100px 80px;
+
+      opacity: 0.14;
+
+      animation:
+        starsDrift 50s linear infinite;
+    }
+
+    .nebula {
+      position: absolute;
+
+      width: 750px;
+      height: 750px;
+
+      top: -350px;
+      right: -280px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(91, 111, 255, 0.11),
+          rgba(91, 111, 255, 0.025) 42%,
+          transparent 70%
+        );
+
+      filter: blur(40px);
+
+      animation:
+        nebulaFloat 15s ease-in-out infinite;
+    }
+
+    .nebula-two {
+      position: absolute;
+
+      width: 500px;
+      height: 500px;
+
+      bottom: -300px;
+      left: -220px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(100, 70, 255, 0.05),
+          transparent 70%
+        );
+
+      filter: blur(50px);
+    }
+
+    .shooting-star {
+      position: absolute;
+
+      width: 100px;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.8),
+          transparent
+        );
+
+      transform: rotate(-35deg);
+
+      opacity: 0;
+
+      animation:
+        shootingStar 10s ease-in-out infinite;
+    }
+
+    .shooting-star.one {
+      top: 18%;
+      left: 12%;
+      animation-delay: 2s;
+    }
+
+    .shooting-star.two {
+      top: 62%;
+      left: 72%;
+      animation-delay: 6s;
+      transform: rotate(-35deg) scale(0.6);
+    }
+
+    /* =====================================================
+       PAGE
+    ===================================================== */
+
+    .page {
+      width: min(1180px, calc(100% - 48px));
+      margin: auto;
+    }
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    header {
+      height: 90px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--line);
+
+      animation:
+        fadeDown 1s ease both;
+    }
+
+    .logo {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      font-size: 10px;
+      color: var(--muted);
+
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #9cffc7;
+
+      box-shadow:
+        0 0 10px rgba(156, 255, 199, 0.8);
+
+      animation:
+        pulse 2.5s ease-in-out infinite;
+    }
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .hero {
+      min-height: calc(100vh - 90px);
+
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+
+      align-items: center;
+
+      gap: 60px;
+
+      padding: 70px 0;
+    }
+
+    .hero-content {
+      animation:
+        heroIn 1.1s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        both;
+
+      animation-delay: 0.15s;
+    }
+
+    .mission {
+      margin-bottom: 30px;
+
+      font-size: 10px;
+
+      color: var(--accent);
+
+      letter-spacing: 0.22em;
+
+      text-transform: uppercase;
+    }
+
+    .mission::before {
+      content: "";
+
+      display: inline-block;
+
+      width: 28px;
+      height: 1px;
+
+      margin-right: 12px;
+
+      vertical-align: middle;
+
+      background: var(--accent);
+
+      opacity: 0.7;
+    }
+
+    h1 {
+      font-size: clamp(58px, 8vw, 108px);
+
+      line-height: 0.88;
+
+      letter-spacing: -0.065em;
+
+      font-weight: 500;
+    }
+
+    .name-line {
+      display: block;
+
+      overflow: hidden;
+    }
+
+    .name-line span {
+      display: inline-block;
+
+      animation:
+        revealText 1s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        both;
+    }
+
+    .name-line:nth-child(2) span {
+      animation-delay: 0.12s;
+    }
+
+    .subtitle {
+      margin-top: 32px;
+
+      max-width: 520px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.8;
+
+      animation:
+        fadeUp 1s ease both;
+
+      animation-delay: 0.5s;
+    }
+
+    .subtitle strong {
+      color: #dce2f3;
+
+      font-weight: 400;
+    }
+
+    /* =====================================================
+       LINKS
+    ===================================================== */
+
+    .hero-links {
+      margin-top: 42px;
+
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+
+      animation:
+        fadeUp 1s ease both;
+
+      animation-delay: 0.7s;
+    }
+
+    .hero-link {
+      position: relative;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 13px 18px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 100px;
+
+      color: var(--text);
+
+      text-decoration: none;
+
+      font-size: 11px;
+
+      overflow: hidden;
+
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .hero-link::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          110deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+
+      transform: translateX(-120%);
+
+      transition:
+        transform 0.6s ease;
+    }
+
+    .hero-link:hover {
+      transform: translateY(-3px);
+
+      border-color:
+        rgba(145, 164, 255, 0.45);
+
+      background:
+        rgba(145, 164, 255, 0.07);
+    }
+
+    .hero-link:hover::before {
+      transform: translateX(120%);
+    }
+
+    /* =====================================================
+       COSMIC VISUAL
+    ===================================================== */
+
+    .hero-visual {
+      display: flex;
+
+      justify-content: center;
+      align-items: center;
+
+      animation:
+        visualIn 1.5s
+        cubic-bezier(0.16, 1, 0.3, 1)
+        both;
+
+      animation-delay: 0.3s;
+    }
+
+    .cosmic-visual {
+      position: relative;
+
+      width: min(500px, 85vw);
+
+      aspect-ratio: 1;
+
+      display: grid;
+
+      place-items: center;
+
+      perspective: 1000px;
+    }
+
+    /* Deep field */
+
+    .deep-field {
+      position: absolute;
+
+      inset: 0;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 50% 50%,
+          rgba(120, 140, 255, 0.09),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 30% 30%,
+          rgba(255, 255, 255, 0.025),
+          transparent 40%
+        );
+
+      filter: blur(1px);
+
+      animation:
+        fieldPulse 7s ease-in-out infinite;
+    }
+
+    /* Particles */
+
+    .particle {
+      position: absolute;
+
+      width: 3px;
+      height: 3px;
+
+      border-radius: 50%;
+
+      background: #dce4ff;
+
+      box-shadow:
+        0 0 10px rgba(180, 195, 255, 0.8);
+
+      opacity: 0.35;
+
+      animation:
+        particleFloat 8s ease-in-out infinite;
+    }
+
+    .p1 {
+      top: 18%;
+      left: 25%;
+
+      animation-delay: -1s;
+    }
+
+    .p2 {
+      top: 72%;
+      left: 18%;
+
+      transform: scale(0.6);
+
+      animation-delay: -4s;
+    }
+
+    .p3 {
+      top: 28%;
+      right: 15%;
+
+      transform: scale(0.5);
+
+      animation-delay: -2s;
+    }
+
+    .p4 {
+      bottom: 18%;
+      right: 25%;
+
+      transform: scale(0.7);
+
+      animation-delay: -6s;
+    }
+
+    .p5 {
+      top: 50%;
+      left: 7%;
+
+      transform: scale(0.45);
+
+      animation-delay: -3s;
+    }
+
+    .p6 {
+      top: 12%;
+      right: 36%;
+
+      transform: scale(0.35);
+
+      animation-delay: -7s;
+    }
+
+    /* Orbital system */
+
+    .orbital-system {
+      position: relative;
+
+      width: 360px;
+      height: 360px;
+
+      transform-style: preserve-3d;
+
+      animation:
+        systemFloat 8s ease-in-out infinite;
+    }
+
+    /* Orbits */
+
+    .orbit {
+      position: absolute;
+
+      top: 50%;
+      left: 50%;
+
+      width: 330px;
+      height: 115px;
+
+      border: 1px solid
+        rgba(145, 164, 255, 0.18);
+
+      border-radius: 50%;
+
+      transform:
+        translate(-50%, -50%)
+        rotateX(68deg);
+
+      transform-style: preserve-3d;
+    }
+
+    .orbit-a {
+      animation:
+        orbitSpinA 18s linear infinite;
+    }
+
+    .orbit-b {
+      width: 300px;
+      height: 150px;
+
+      border-color:
+        rgba(255, 255, 255, 0.09);
+
+      transform:
+        translate(-50%, -50%)
+        rotateX(68deg)
+        rotateY(35deg);
+
+      animation:
+        orbitSpinB 25s linear infinite;
+    }
+
+    .orbit-c {
+      width: 250px;
+      height: 90px;
+
+      border-color:
+        rgba(145, 164, 255, 0.11);
+
+      transform:
+        translate(-50%, -50%)
+        rotateX(68deg)
+        rotateY(-40deg);
+
+      animation:
+        orbitSpinC 14s linear infinite;
+    }
+
+    /* Energy ring */
+
+    .energy-ring {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: 180px;
+      height: 180px;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(145, 164, 255, 0.12);
+
+      box-shadow:
+        0 0 45px
+          rgba(100, 120, 255, 0.08),
+        inset 0 0 35px
+          rgba(100, 120, 255, 0.05);
+
+      animation:
+        energyPulse 5s ease-in-out infinite;
+    }
+
+    /* Core */
+
+    .core {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: 105px;
+      height: 105px;
+
+      transform:
+        translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          #dce4ff 0%,
+          #8c9cff 15%,
+          #47517d 34%,
+          #171c2c 63%,
+          #070910 100%
+        );
+
+      box-shadow:
+        0 0 35px
+          rgba(120, 140, 255, 0.22),
+        0 0 90px
+          rgba(100, 120, 255, 0.08),
+        inset -18px -15px 25px
+          rgba(0, 0, 0, 0.65);
+
+      animation:
+        coreBreath 5s ease-in-out infinite;
+
+      z-index: 5;
+    }
+
+    .core-inner {
+      position: absolute;
+
+      inset: 12px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+      box-shadow:
+        inset 0 0 20px
+          rgba(170, 185, 255, 0.12);
+    }
+
+    .core-light {
+      position: absolute;
+
+      width: 20px;
+      height: 20px;
+
+      left: 32%;
+      top: 27%;
+
+      border-radius: 50%;
+
+      background: white;
+
+      filter: blur(5px);
+
+      opacity: 0.55;
+    }
+
+    /* Signal */
+
+    .signal {
+      position: absolute;
+
+      width: 1px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          transparent,
+          rgba(160, 175, 255, 0.8),
+          transparent
+        );
+
+      opacity: 0.4;
+    }
+
+    .signal-1 {
+      height: 70px;
+
+      top: 5%;
+      left: 50%;
+
+      animation:
+        signalMove 3s ease-in-out infinite;
+    }
+
+    .signal-2 {
+      height: 45px;
+
+      bottom: 8%;
+      left: 62%;
+
+      animation:
+        signalMove 4s ease-in-out infinite reverse;
+    }
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .navigation {
+      border-top: 1px solid var(--line);
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      animation:
+        fadeUp 1s ease both;
+
+      animation-delay: 0.9s;
+    }
+
+    .nav-item {
+      position: relative;
+
+      padding: 30px 20px;
+
+      border-right:
+        1px solid var(--line);
+
+      text-decoration: none;
+
+      color: var(--muted);
+
+      overflow: hidden;
+
+      transition:
+        color 0.35s ease,
+        background 0.35s ease;
+    }
+
+    .nav-item:first-child {
+      border-left:
+        1px solid var(--line);
+    }
+
+    .nav-item::after {
+      content: "";
+
+      position: absolute;
+
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      height: 1px;
+
+      background: var(--accent);
+
+      transform: scaleX(0);
+
+      transform-origin: left;
+
+      transition:
+        transform 0.4s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--text);
+
+      background:
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .nav-item:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-number {
+      display: block;
+
+      font-size: 9px;
+
+      color: var(--accent);
+
+      margin-bottom: 14px;
+
+      letter-spacing: 0.15em;
+    }
+
+    .nav-title {
+      font-size: 13px;
+    }
+
+    /* =====================================================
+       ANIMATIONS
+    ===================================================== */
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes visualIn {
+      from {
+        opacity: 0;
+        transform: scale(0.82);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes revealText {
+      from {
+        opacity: 0;
+        transform: translateY(100%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes systemFloat {
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotateX(0deg);
+      }
+
+      50% {
+        transform:
+          translateY(-10px)
+          rotateX(2deg);
+      }
+    }
+
+    @keyframes orbitSpinA {
+      from {
+        transform:
+          translate(-50%, -50%)
+          rotateX(68deg)
+          rotateZ(0deg);
+      }
+
+      to {
+        transform:
+          translate(-50%, -50%)
+          rotateX(68deg)
+          rotateZ(360deg);
+      }
+    }
+
+    @keyframes orbitSpinB {
+      from {
+        transform:
+          translate(-50%, -50%)
+          rotateX(68deg)
+          rotateY(35deg)
+          rotateZ(0deg);
+      }
+
+      to {
+        transform:
+          translate(-50%, -50%)
+          rotateX(68deg)
+          rotateY(35deg)
+          rotateZ(-360deg);
+      }
+    }
+
+    @keyframes orbitSpinC {
+      from {
+        transform:
+          translate(-50%, -50%)
+          rotateX(68deg)
+          rotateY(-40deg)
+          rotateZ(0deg);
+      }
+
+      to {
+        transform:
+          translate(-50%, -50%)
+          rotateX(68deg)
+          rotateY(-40deg)
+          rotateZ(360deg);
+      }
+    }
+
+    @keyframes coreBreath {
+      0%, 100% {
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      50% {
+        transform:
+          translate(-50%, -50%)
+          scale(1.035);
+      }
+    }
+
+    @keyframes energyPulse {
+      0%, 100% {
+        opacity: 0.5;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      50% {
+        opacity: 1;
+
+        transform:
+          translate(-50%, -50%)
+          scale(1.08);
+      }
+    }
+
+    @keyframes fieldPulse {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.12);
+      }
+    }
+
+    @keyframes particleFloat {
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: 0.25;
+      }
+
+      50% {
+        transform:
+          translate(10px, -18px);
+
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes signalMove {
+      0%, 100% {
+        opacity: 0.1;
+
+        transform:
+          scaleY(0.5);
+      }
+
+      50% {
+        opacity: 0.8;
+
+        transform:
+          scaleY(1);
+      }
+    }
+
+    @keyframes starsDrift {
+      from {
+        transform:
+          translate(0, 0);
+      }
+
+      to {
+        transform:
+          translate(-80px, 50px);
+      }
+    }
+
+    @keyframes nebulaFloat {
+      0%, 100% {
+        transform:
+          scale(1);
+      }
+
+      50% {
+        transform:
+          scale(1.08)
+          translate(-20px, 15px);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    @keyframes shootingStar {
+      0%,
+      65%,
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(0, 0)
+          rotate(-35deg);
+      }
+
+      68% {
+        opacity: 0.8;
+      }
+
+      75% {
+        opacity: 0;
+
+        transform:
+          translate(260px, 150px)
+          rotate(-35deg);
+      }
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 800px) {
+
+      .page {
+        width:
+          min(100% - 32px, 600px);
+      }
+
+      header {
+        height: 75px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+        padding:
+          55px 0
+          45px;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .cosmic-visual {
+        width: 330px;
+      }
+
+      .orbital-system {
+        width: 290px;
+        height: 290px;
+      }
+
+      .orbit {
+        width: 270px;
+        height: 95px;
+      }
+
+      .orbit-b {
+        width: 245px;
+        height: 120px;
+      }
+
+      .orbit-c {
+        width: 210px;
+        height: 75px;
+      }
+
+      .core {
+        width: 85px;
+        height: 85px;
+      }
+
+      .energy-ring {
+        width: 150px;
+        height: 150px;
+      }
+
+      h1 {
+        font-size:
+          clamp(56px, 17vw, 95px);
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      .navigation {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .nav-item {
+        padding: 24px 16px;
+      }
+
+      .nav-item:nth-child(2) {
+        border-right: 0;
+      }
+
+      .nav-item:nth-child(3) {
+        border-left: 1px solid var(--line);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        scroll-behavior:
+          auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================================================
+       BACKGROUND
+  ==================================================== -->
+
+  <div class="space">
+
+    <div class="stars"></div>
+
+    <div class="nebula"></div>
+
+    <div class="nebula-two"></div>
+
+    <div class="shooting-star one"></div>
+
+    <div class="shooting-star two"></div>
+
+  </div>
+
+
+  <!-- ===================================================
+       PAGE
+  ==================================================== -->
+
+  <div class="page">
+
+
+    <!-- HEADER -->
+
+    <header>
+
+      <div class="logo">
+        A way to Mim
+      </div>
+
+      <div class="status">
+
+        <span class="status-dot"></span>
+
+        In Space
+
+      </div>
+
+    </header>
+
+
+    <!-- =================================================
+         HERO
+    ================================================== -->
+
+    <main>
+
+      <section class="hero">
+
+
+        <!-- TEXT -->
+
+        <div class="hero-content">
+
+          <div class="mission">
+            Mission 01 — Exploring the Unknown
+          </div>
+
+
+          <h1>
+
+            <span class="name-line">
+              <span>Mohammad</span>
+            </span>
+
+            <span class="name-line">
+              <span>Siahbalaei</span>
+            </span>
+
+          </h1>
+
+
+          <p class="subtitle">
+
+            <strong>
+              R&amp;D · Learning · Exploration
+            </strong>
+
+            <br />
+
+            I research, build, learn and explore
+            the space between what we know
+            and what we could discover.
+
+          </p>
+
+
+          <div class="hero-links">
+
+            <a
+              href="#about"
+              class="hero-link"
+            >
+              Explore profile
+              <span>→</span>
+            </a>
+
+            <a
+              href="#contact"
+              class="hero-link"
+            >
+              Contact
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             COSMIC VISUAL
+        ================================================== -->
+
+        <div class="hero-visual">
+
+          <div class="cosmic-visual">
+
+            <div class="deep-field"></div>
+
+
+            <!-- Particles -->
+
+            <div class="particle p1"></div>
+            <div class="particle p2"></div>
+            <div class="particle p3"></div>
+            <div class="particle p4"></div>
+            <div class="particle p5"></div>
+            <div class="particle p6"></div>
+
+
+            <!-- Orbital system -->
+
+            <div class="orbital-system">
+
+              <div class="orbit orbit-a"></div>
+
+              <div class="orbit orbit-b"></div>
+
+              <div class="orbit orbit-c"></div>
+
+
+              <div class="energy-ring"></div>
+
+
+              <!-- Core -->
+
+              <div class="core">
+
+                <div class="core-inner"></div>
+
+                <div class="core-light"></div>
+
+              </div>
+
+
+              <!-- Signals -->
+
+              <div class="signal signal-1"></div>
+
+              <div class="signal signal-2"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           NAVIGATION
+      ================================================== -->
+
+      <nav class="navigation">
+
+
+        <a
+          href="#about"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            01
+          </span>
+
+          <span class="nav-title">
+            About
+          </span>
+
+        </a>
+
+
+        <a
+          href="#projects"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            02
+          </span>
+
+          <span class="nav-title">
+            Projects
+          </span>
+
+        </a>
+
+
+        <a
+          href="#notes"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            03
+          </span>
+
+          <span class="nav-title">
+            Notes
+          </span>
+
+        </a>
+
+
+        <a
+          href="#contact"
+          class="nav-item"
+        >
+
+          <span class="nav-number">
+            04
+          </span>
+
+          <span class="nav-title">
+            Contact
+          </span>
+
+        </a>
+
+      </nav>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
