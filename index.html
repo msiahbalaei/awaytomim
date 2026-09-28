@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>A way to Mim — Mohammad Siahbalaei</title>
 
   <style>
     :root {
       --bg: #04060b;
       --bg-soft: #080b13;
+
       --text: #f4f6ff;
       --muted: #7d8496;
+
       --line: rgba(255,255,255,.08);
+
       --accent: #91a4ff;
       --accent-soft: rgba(145,164,255,.14);
     }
@@ -29,9 +33,18 @@
     body {
       min-height: 100vh;
       overflow-x: hidden;
+
       background: var(--bg);
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
 
     a {
@@ -39,437 +52,1450 @@
       text-decoration: none;
     }
 
+
+    /* ========================================
+       SPACE BACKGROUND
+       ======================================== */
+
     .space {
       position: fixed;
       inset: 0;
+
       overflow: hidden;
       pointer-events: none;
+
       z-index: 0;
+
       background:
-        radial-gradient(circle at 50% 45%, rgba(72,91,170,.10), transparent 28%),
-        radial-gradient(circle at 15% 20%, rgba(87,65,160,.07), transparent 25%),
+        radial-gradient(
+          circle at 50% 45%,
+          rgba(72,91,170,.10),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(87,65,160,.07),
+          transparent 25%
+        ),
         #04060b;
     }
+
 
     .stars {
       position: absolute;
       inset: 0;
+
       opacity: .65;
+
       background-image:
-        radial-gradient(circle, rgba(255,255,255,.75) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,.35) 1px, transparent 1px);
-      background-size: 110px 110px, 180px 180px;
-      background-position: 10px 20px, 80px 60px;
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.75) 1px,
+          transparent 1px
+        ),
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.35) 1px,
+          transparent 1px
+        );
+
+      background-size:
+        110px 110px,
+        180px 180px;
+
+      background-position:
+        10px 20px,
+        80px 60px;
     }
+
 
     .nebula {
       position: absolute;
+
       width: 65vw;
       height: 65vw;
+
       max-width: 900px;
       max-height: 900px;
+
       left: 50%;
       top: 42%;
+
       transform: translate(-50%, -50%);
+
       border-radius: 50%;
-      background: radial-gradient(
-        circle,
-        rgba(105,126,255,.08),
-        rgba(70,75,150,.035) 35%,
-        transparent 70%
-      );
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(105,126,255,.08),
+          rgba(70,75,150,.035) 35%,
+          transparent 70%
+        );
+
       filter: blur(35px);
+
+      animation:
+        nebulaPulse 12s ease-in-out infinite;
     }
+
 
     .nebula-two {
       position: absolute;
+
       width: 45vw;
       height: 45vw;
+
       right: -15%;
       top: -15%;
+
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(110,80,190,.06), transparent 70%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(110,80,190,.06),
+          transparent 70%
+        );
+
       filter: blur(40px);
+
+      animation:
+        nebulaFloat 18s ease-in-out infinite;
     }
+
 
     .shooting-star {
       position: absolute;
+
       width: 100px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.65),
+          transparent
+        );
+
       transform: rotate(-28deg);
+
       top: 25%;
       left: 18%;
+
       opacity: .35;
+
+      animation:
+        shootingStar 9s ease-in-out infinite;
     }
+
+
+    /* ========================================
+       MAIN CONTAINER
+       ======================================== */
 
     .container {
       position: relative;
+
       z-index: 2;
+
       min-height: 100vh;
+
       max-width: 1200px;
+
       margin: 0 auto;
+
       padding: 32px 42px;
+
       display: flex;
       flex-direction: column;
     }
 
+
+    /* ========================================
+       HEADER
+       ======================================== */
+
     header {
       display: flex;
+
       justify-content: space-between;
       align-items: center;
     }
 
+
     .brand {
       font-size: 14px;
+
       letter-spacing: .12em;
+
       text-transform: uppercase;
+
       font-weight: 600;
     }
 
+
     .status {
       display: flex;
+
       align-items: center;
+
       gap: 8px;
+
       color: var(--muted);
+
       font-size: 12px;
+
       letter-spacing: .08em;
+
       text-transform: uppercase;
     }
+
 
     .status-dot {
       width: 6px;
       height: 6px;
+
       border-radius: 50%;
+
       background: #9ef0c2;
-      box-shadow: 0 0 12px rgba(158,240,194,.7);
+
+      box-shadow:
+        0 0 12px rgba(158,240,194,.7);
+
+      animation:
+        statusPulse 2.5s ease-in-out infinite;
     }
+
+
+    /* ========================================
+       HERO
+       ======================================== */
 
     main {
       flex: 1;
+
       display: grid;
+
       grid-template-columns: 1fr 1fr;
+
       align-items: center;
+
       gap: 40px;
+
       padding: 40px 0 100px;
     }
+
 
     .hero {
       max-width: 600px;
     }
 
+
     .eyebrow {
       color: var(--accent);
+
       font-size: 12px;
+
       letter-spacing: .18em;
+
       text-transform: uppercase;
+
       margin-bottom: 22px;
     }
 
+
     h1 {
-      font-size: clamp(52px, 8vw, 108px);
+      font-size:
+        clamp(
+          52px,
+          8vw,
+          108px
+        );
+
       line-height: .92;
+
       letter-spacing: -.065em;
+
       font-weight: 500;
+
       margin-bottom: 24px;
     }
 
+
     .subtitle {
       color: var(--muted);
+
       font-size: 16px;
+
       letter-spacing: .04em;
+
       margin-bottom: 34px;
     }
 
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+
     .actions {
       display: flex;
+
       gap: 12px;
+
       flex-wrap: wrap;
     }
 
+
     .button {
       border: 1px solid var(--line);
+
       background: rgba(255,255,255,.025);
+
       padding: 12px 17px;
+
       border-radius: 999px;
+
       color: #dce1f2;
+
       font-size: 13px;
-      transition: .25s ease;
+
+      transition:
+        .25s ease;
     }
+
 
     .button:hover {
-      border-color: rgba(145,164,255,.4);
-      background: var(--accent-soft);
-      transform: translateY(-2px);
+      border-color:
+        rgba(145,164,255,.4);
+
+      background:
+        var(--accent-soft);
+
+      transform:
+        translateY(-2px);
     }
 
+
     .button.primary {
-      border-color: rgba(145,164,255,.3);
-      background: var(--accent-soft);
+      border-color:
+        rgba(145,164,255,.3);
+
+      background:
+        var(--accent-soft);
+
       color: #e8ecff;
     }
 
+
+    /* ========================================
+       COSMIC VISUAL
+       ======================================== */
+
     .cosmic-visual {
       position: relative;
-      width: min(520px, 45vw);
+
+      width:
+        min(
+          520px,
+          45vw
+        );
+
       aspect-ratio: 1;
+
       margin: auto;
+
       display: grid;
+
       place-items: center;
     }
+
 
     .deep-field {
       position: absolute;
+
       inset: 12%;
+
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(120,140,255,.09), transparent 65%);
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(120,140,255,.09),
+          transparent 65%
+        );
+
       filter: blur(8px);
+
+      animation:
+        fieldPulse 7s ease-in-out infinite;
     }
+
+
+    /* ========================================
+       ORBITAL SYSTEM
+       ======================================== */
 
     .orbital-system {
       position: absolute;
+
       inset: 0;
+
       display: grid;
+
       place-items: center;
+
+      animation:
+        systemDrift 18s ease-in-out infinite;
     }
+
+
+    /* ========================================
+       ORBIT RINGS
+       ======================================== */
 
     .orbit {
       position: absolute;
-      border: 1px solid rgba(145,164,255,.12);
+
+      border:
+        1px solid
+        rgba(145,164,255,.12);
+
       border-radius: 50%;
-      transform: rotate(-18deg);
     }
+
 
     .orbit.one {
       width: 54%;
       height: 54%;
+
+      animation:
+        orbitRotateOne 22s linear infinite;
     }
+
 
     .orbit.two {
       width: 76%;
       height: 38%;
+
       transform: rotate(35deg);
+
+      animation:
+        orbitRotateTwo 28s linear infinite reverse;
     }
+
 
     .orbit.three {
       width: 88%;
       height: 58%;
+
       transform: rotate(-52deg);
+
+      animation:
+        orbitRotateThree 34s linear infinite;
     }
+
+
+    /* ========================================
+       ENERGY RING
+       ======================================== */
 
     .energy-ring {
       position: absolute;
+
       width: 42%;
       height: 42%;
+
       border-radius: 50%;
-      border: 1px solid rgba(145,164,255,.32);
+
+      border:
+        1px solid
+        rgba(145,164,255,.32);
+
       box-shadow:
         0 0 35px rgba(112,130,255,.12),
         inset 0 0 25px rgba(112,130,255,.08);
+
+      animation:
+        energyRotate 12s linear infinite,
+        energyPulse 4s ease-in-out infinite;
     }
+
+
+    /* ========================================
+       MOVING SATELLITE
+       ======================================== */
+
+    .satellite-orbit {
+      position: absolute;
+
+      width: 76%;
+      height: 38%;
+
+      border-radius: 50%;
+
+      transform: rotate(35deg);
+
+      animation:
+        satelliteOrbit 9s linear infinite;
+    }
+
+
+    .satellite {
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      top: -3.5px;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      border-radius: 50%;
+
+      background: #ffffff;
+
+      box-shadow:
+        0 0 6px #ffffff,
+        0 0 14px rgba(145,164,255,.95),
+        0 0 30px rgba(145,164,255,.65),
+        0 0 55px rgba(91,112,255,.35);
+    }
+
+
+    .satellite::after {
+      content: "";
+
+      position: absolute;
+
+      width: 48px;
+      height: 1px;
+
+      top: 3px;
+      right: 5px;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(145,164,255,.8),
+          transparent
+        );
+
+      transform:
+        rotate(180deg);
+
+      transform-origin:
+        right center;
+
+      filter:
+        blur(.4px);
+    }
+
+
+    /* ========================================
+       CORE
+       ======================================== */
 
     .core {
       position: relative;
+
       width: 22%;
+
       aspect-ratio: 1;
+
       border-radius: 50%;
+
       background:
-        radial-gradient(circle at 35% 30%, #ffffff, #b9c5ff 14%, #687de8 38%, #29366e 68%, transparent 72%);
+        radial-gradient(
+          circle at 35% 30%,
+          #ffffff,
+          #b9c5ff 14%,
+          #687de8 38%,
+          #29366e 68%,
+          transparent 72%
+        );
+
       box-shadow:
         0 0 25px rgba(145,164,255,.7),
         0 0 80px rgba(91,112,255,.3);
+
+      animation:
+        corePulse 3.5s ease-in-out infinite;
     }
+
 
     .core::after {
       content: "";
+
       position: absolute;
+
       inset: 35%;
+
       border-radius: 50%;
+
       background: white;
-      box-shadow: 0 0 20px white;
+
+      box-shadow:
+        0 0 20px white;
     }
+
+
+    /* ========================================
+       SIGNAL LINES
+       ======================================== */
 
     .signal {
       position: absolute;
+
       width: 18%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(145,164,255,.65), transparent);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(145,164,255,.65),
+          transparent
+        );
     }
+
 
     .signal.s1 {
       top: 28%;
       left: 12%;
+
       transform: rotate(18deg);
+
+      animation:
+        signalMoveOne 5s ease-in-out infinite;
     }
+
 
     .signal.s2 {
       bottom: 25%;
       right: 8%;
+
       transform: rotate(-25deg);
+
+      animation:
+        signalMoveTwo 6s ease-in-out infinite;
     }
+
+
+    /* ========================================
+       PARTICLES
+       ======================================== */
 
     .particle {
       position: absolute;
+
       width: 4px;
       height: 4px;
+
       border-radius: 50%;
+
       background: #dbe1ff;
-      box-shadow: 0 0 12px rgba(180,195,255,.9);
+
+      box-shadow:
+        0 0 12px
+        rgba(180,195,255,.9);
     }
 
-    .p1 { top: 17%; left: 38%; }
-    .p2 { top: 34%; right: 12%; width: 3px; height: 3px; }
-    .p3 { bottom: 18%; left: 28%; width: 3px; height: 3px; }
-    .p4 { bottom: 30%; right: 23%; }
-    .p5 { top: 48%; left: 8%; width: 3px; height: 3px; }
-    .p6 { top: 12%; right: 30%; width: 3px; height: 3px; }
+
+    .p1 {
+      top: 17%;
+      left: 38%;
+
+      animation:
+        particleFloat1 5s ease-in-out infinite;
+    }
+
+
+    .p2 {
+      top: 34%;
+      right: 12%;
+
+      width: 3px;
+      height: 3px;
+
+      animation:
+        particleFloat2 7s ease-in-out infinite;
+    }
+
+
+    .p3 {
+      bottom: 18%;
+      left: 28%;
+
+      width: 3px;
+      height: 3px;
+
+      animation:
+        particleFloat3 6s ease-in-out infinite;
+    }
+
+
+    .p4 {
+      bottom: 30%;
+      right: 23%;
+
+      animation:
+        particleFloat4 8s ease-in-out infinite;
+    }
+
+
+    .p5 {
+      top: 48%;
+      left: 8%;
+
+      width: 3px;
+      height: 3px;
+
+      animation:
+        particleFloat5 5.5s ease-in-out infinite;
+    }
+
+
+    .p6 {
+      top: 12%;
+      right: 30%;
+
+      width: 3px;
+      height: 3px;
+
+      animation:
+        particleFloat6 7.5s ease-in-out infinite;
+    }
+
+
+    /* ========================================
+       BOTTOM NAV
+       ======================================== */
 
     .bottom-nav {
       position: fixed;
+
       z-index: 10;
+
       bottom: 24px;
       left: 50%;
-      transform: translateX(-50%);
+
+      transform:
+        translateX(-50%);
+
       display: flex;
+
       align-items: center;
+
       gap: 5px;
+
       padding: 6px;
-      border: 1px solid var(--line);
-      background: rgba(4,6,11,.78);
-      backdrop-filter: blur(16px);
+
+      border:
+        1px solid
+        var(--line);
+
+      background:
+        rgba(4,6,11,.78);
+
+      backdrop-filter:
+        blur(16px);
+
       border-radius: 999px;
     }
 
+
     .bottom-nav a {
       color: var(--muted);
+
       font-size: 11px;
+
       letter-spacing: .06em;
+
       padding: 9px 13px;
+
       border-radius: 999px;
-      transition: .2s ease;
+
+      transition:
+        .2s ease;
+
       white-space: nowrap;
     }
+
 
     .bottom-nav a:hover,
     .bottom-nav a.active {
       color: var(--text);
-      background: rgba(255,255,255,.06);
+
+      background:
+        rgba(255,255,255,.06);
     }
 
+
+    /* ========================================
+       ANIMATIONS
+       ======================================== */
+
+    @keyframes systemDrift {
+
+      0%, 100% {
+        transform:
+          translateY(0)
+          rotate(0deg);
+      }
+
+      50% {
+        transform:
+          translateY(-8px)
+          rotate(1deg);
+      }
+    }
+
+
+    @keyframes orbitRotateOne {
+
+      from {
+        transform:
+          rotate(-18deg);
+      }
+
+      to {
+        transform:
+          rotate(342deg);
+      }
+    }
+
+
+    @keyframes orbitRotateTwo {
+
+      from {
+        transform:
+          rotate(35deg);
+      }
+
+      to {
+        transform:
+          rotate(-325deg);
+      }
+    }
+
+
+    @keyframes orbitRotateThree {
+
+      from {
+        transform:
+          rotate(-52deg);
+      }
+
+      to {
+        transform:
+          rotate(308deg);
+      }
+    }
+
+
+    @keyframes satelliteOrbit {
+
+      from {
+        transform:
+          rotate(35deg);
+      }
+
+      to {
+        transform:
+          rotate(395deg);
+      }
+    }
+
+
+    @keyframes energyRotate {
+
+      from {
+        transform:
+          rotate(0deg);
+      }
+
+      to {
+        transform:
+          rotate(360deg);
+      }
+    }
+
+
+    @keyframes energyPulse {
+
+      0%, 100% {
+        opacity: .65;
+
+        box-shadow:
+          0 0 35px rgba(112,130,255,.12),
+          inset 0 0 25px rgba(112,130,255,.08);
+      }
+
+      50% {
+        opacity: 1;
+
+        box-shadow:
+          0 0 55px rgba(112,130,255,.25),
+          inset 0 0 35px rgba(112,130,255,.15);
+      }
+    }
+
+
+    @keyframes corePulse {
+
+      0%, 100% {
+        transform:
+          scale(1);
+
+        filter:
+          brightness(1);
+      }
+
+      50% {
+        transform:
+          scale(1.08);
+
+        filter:
+          brightness(1.25);
+      }
+    }
+
+
+    @keyframes fieldPulse {
+
+      0%, 100% {
+        transform:
+          scale(1);
+
+        opacity: .7;
+      }
+
+      50% {
+        transform:
+          scale(1.12);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes nebulaPulse {
+
+      0%, 100% {
+        opacity: .65;
+        transform:
+          translate(-50%, -50%)
+          scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform:
+          translate(-50%, -50%)
+          scale(1.08);
+      }
+    }
+
+
+    @keyframes nebulaFloat {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+      }
+
+      50% {
+        transform:
+          translate(-25px, 20px);
+      }
+    }
+
+
+    @keyframes shootingStar {
+
+      0%, 70%, 100% {
+        opacity: 0;
+        transform:
+          translate(0, 0)
+          rotate(-28deg);
+      }
+
+      75% {
+        opacity: .5;
+      }
+
+      85% {
+        opacity: 0;
+
+        transform:
+          translate(160px, 80px)
+          rotate(-28deg);
+      }
+    }
+
+
+    @keyframes signalMoveOne {
+
+      0%, 100% {
+        opacity: .2;
+
+        transform:
+          rotate(18deg)
+          translateX(0);
+      }
+
+      50% {
+        opacity: .8;
+
+        transform:
+          rotate(18deg)
+          translateX(18px);
+      }
+    }
+
+
+    @keyframes signalMoveTwo {
+
+      0%, 100% {
+        opacity: .2;
+
+        transform:
+          rotate(-25deg)
+          translateX(0);
+      }
+
+      50% {
+        opacity: .8;
+
+        transform:
+          rotate(-25deg)
+          translateX(-18px);
+      }
+    }
+
+
+    @keyframes particleFloat1 {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: .5;
+      }
+
+      50% {
+        transform:
+          translate(12px, -10px);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes particleFloat2 {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: .4;
+      }
+
+      50% {
+        transform:
+          translate(-10px, 14px);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes particleFloat3 {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: .5;
+      }
+
+      50% {
+        transform:
+          translate(14px, 8px);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes particleFloat4 {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: .4;
+      }
+
+      50% {
+        transform:
+          translate(-12px, -12px);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes particleFloat5 {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: .5;
+      }
+
+      50% {
+        transform:
+          translate(10px, 10px);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes particleFloat6 {
+
+      0%, 100% {
+        transform:
+          translate(0, 0);
+
+        opacity: .4;
+      }
+
+      50% {
+        transform:
+          translate(-14px, 8px);
+
+        opacity: 1;
+      }
+    }
+
+
+    @keyframes statusPulse {
+
+      0%, 100% {
+        opacity: .5;
+        transform: scale(.85);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+    }
+
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+
     @media (max-width: 800px) {
+
       .container {
         padding: 24px;
       }
 
+
       main {
         grid-template-columns: 1fr;
+
         text-align: center;
+
         padding-top: 70px;
       }
+
 
       .hero {
         margin: auto;
       }
 
+
       .actions {
         justify-content: center;
       }
 
+
       .cosmic-visual {
-        width: min(400px, 82vw);
+        width:
+          min(
+            400px,
+            82vw
+          );
       }
+
 
       .bottom-nav {
-        max-width: calc(100vw - 20px);
-        overflow-x: auto;
+        max-width:
+          calc(100vw - 20px);
+
+        overflow-x:
+          auto;
       }
+
 
       .bottom-nav a {
-        padding: 9px 10px;
+        padding:
+          9px 10px;
       }
     }
 
+
+    /* ========================================
+       REDUCED MOTION
+       ======================================== */
+
     @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto !important;
+
+      .orbital-system,
+      .orbit,
+      .energy-ring,
+      .core,
+      .deep-field,
+      .signal,
+      .particle,
+      .satellite-orbit,
+      .nebula,
+      .nebula-two,
+      .shooting-star,
+      .status-dot {
+        animation: none !important;
       }
     }
+
   </style>
 </head>
 
+
 <body>
 
+
+  <!-- ========================================
+       BACKGROUND
+       ======================================== -->
+
   <div class="space">
+
     <div class="stars"></div>
+
     <div class="nebula"></div>
+
     <div class="nebula-two"></div>
+
     <div class="shooting-star"></div>
+
   </div>
+
+
+  <!-- ========================================
+       MAIN
+       ======================================== -->
 
   <div class="container">
 
+
+    <!-- HEADER -->
+
     <header>
-      <a href="index.html" class="brand">A way to Mim</a>
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+        A way to Mim
+      </a>
+
 
       <div class="status">
+
         <span class="status-dot"></span>
-        In Space
+
+        Online
+
       </div>
+
     </header>
+
+
+    <!-- HERO -->
 
     <main>
 
+
       <section class="hero">
-        <div class="eyebrow">Mission 01 — Exploring the Unknown</div>
 
-        <h1>Mohammad<br>Siahbalaei</h1>
 
-        <p class="subtitle">R&amp;D · Learning · Exploration</p>
+        <div class="eyebrow">
+          Mission 01 — Exploring the Unknown
+        </div>
+
+
+        <h1>
+          Mohammad<br>
+          Siahbalaei
+        </h1>
+
+
+        <p class="subtitle">
+          R&amp;D · Learning · Exploration
+        </p>
+
 
         <div class="actions">
-          <a class="button primary" href="about.html">
+
+
+          <a
+            class="button primary"
+            href="about.html"
+          >
             Explore profile →
           </a>
 
-          <a class="button" href="contact.html">
+
+          <a
+            class="button"
+            href="contact.html"
+          >
             Contact
           </a>
+
+
         </div>
+
+
       </section>
 
-      <section class="cosmic-visual" aria-hidden="true">
+
+      <!-- ========================================
+           ORBITAL CORE
+           ======================================== -->
+
+      <section
+        class="cosmic-visual"
+        aria-hidden="true"
+      >
+
+
         <div class="deep-field"></div>
 
+
         <div class="orbital-system">
+
+
+          <!-- ORBITS -->
+
           <div class="orbit one"></div>
+
           <div class="orbit two"></div>
+
           <div class="orbit three"></div>
 
+
+          <!-- ENERGY -->
+
           <div class="energy-ring"></div>
+
+
+          <!-- MOVING SATELLITE -->
+
+          <div class="satellite-orbit">
+
+            <div class="satellite"></div>
+
+          </div>
+
+
+          <!-- CORE -->
+
           <div class="core"></div>
 
+
+          <!-- SIGNALS -->
+
           <div class="signal s1"></div>
+
           <div class="signal s2"></div>
 
+
+          <!-- PARTICLES -->
+
           <div class="particle p1"></div>
+
           <div class="particle p2"></div>
+
           <div class="particle p3"></div>
+
           <div class="particle p4"></div>
+
           <div class="particle p5"></div>
+
           <div class="particle p6"></div>
+
+
         </div>
+
+
       </section>
+
 
     </main>
 
+
   </div>
 
+
+  <!-- ========================================
+       NAVIGATION
+       ======================================== -->
+
   <nav class="bottom-nav">
-    <a href="index.html" class="active">00 Mission Control</a>
-    <a href="about.html">01 About</a>
-    <a href="projects.html">02 Projects</a>
-    <a href="contact.html">04 Contact</a>
+
+
+    <a
+      href="index.html"
+      class="active"
+    >
+      00 Mission Control
+    </a>
+
+
+    <a
+      href="about.html"
+    >
+      01 About
+    </a>
+
+
+    <a
+      href="projects.html"
+    >
+      02 Projects
+    </a>
+
+
+    <a
+      href="contact.html"
+    >
+      04 Contact
+    </a>
+
+
   </nav>
+
 
 </body>
 </html>
